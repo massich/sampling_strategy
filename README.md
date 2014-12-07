@@ -9,4 +9,6 @@ learning samples in order to determine how good a training strategy is.
 further my learning is from the sampling model, the better my learning.
 
 # Usage
-```ipython notebook
+```
+ipython notebook
+```
