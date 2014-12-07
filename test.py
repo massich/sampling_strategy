@@ -17,7 +17,7 @@ class DataSimulationModel(object):
 
     @abstractmethod
     def __init__(self, *args, **kwargs):
-        print "this is the abstract class constructor"
+        pass
 
     def __str__(self):
         pass
