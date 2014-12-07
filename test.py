@@ -17,32 +17,23 @@ class DataSimulationModel(object):
 
     @abstractmethod
     def __init__(self, *args, **kwargs):
-        # information in pytonic constructors:
-        #  http://tinyurl.com/3758j8u
-        #  http://tinyurl.com/424tbt7
-        pass
+        print "this is the abstract class constructor"
 
-    @abstractmethod
     def __str__(self):
         pass
 
-    @abstractmethod
     def generate_data(self, numSamples):
         pass
 
-    @abstractmethod
     def draw_model(self, axisId):
         pass
 
 
-def MultiVariatedGaussianModel(DataSimulationModel):
+class MultiVariatedGaussianModel(DataSimulationModel):
     def __init__(self, *args, **kwargs):
         # args -- tuple of anonymous arguments
         # kwargs -- dictionary of named arguments
-        # self.num_holes = kwargs.get('num_holes',random_holes())
-        self.num_holes = kwargs.get('num_holes', 1)
         print 'args: ', args, ' kwargs: ', kwargs
-        pass
 
     def generate_data(sef, numSamples):
         pass
