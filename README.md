@@ -10,5 +10,5 @@ further my learning is from the sampling model, the better my learning.
 
 # Usage
 ```
-ipython notebook
+ipython notebook --pylab inline
 ```
