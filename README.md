@@ -1,20 +1,12 @@
-ipynb_template
+Sampling Strategies
 ==============
 
-Template for creating a new git repo for an ipython notebook
+These notebooks are intended to study the effect of sampling strategies on 
+learning samples in order to determine how good a training strategy is.
 
-1. Clone this repository 
-1. Rename the directory to something meaningful
+###Hypothesis
+> If I sample my data with a set of known models, each of it more useless, the
+further my learning is from the sampling model, the better my learning.
 
-1. Make sure `nbstripout` is in your path and chmod +x
-
-1. Add the following to your .gitconfig:
-
-    	[filter "nbstrip"]        
-    	    clean = /home/cfriedline/bin/nbstripout
-    		smudge =cat
-    		required
-
-1. create a new github repo and change the origin in `.git/config`
-    
-    	git remote set-url origin git@github.com:cfriedline/[new_repo].git
+# Usage
+```ipython notebook
