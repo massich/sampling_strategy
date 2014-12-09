@@ -20,6 +20,8 @@ def getMethodNames(obj):
 
 
 class A(object):
+    __slots__ = ["aVar", "aMorphVar"]
+
     def __init__(self):
         self.aVar = 'A'         # This is managed by A class
         self.aMorphVar = 'A'    # Subclass should modify it
