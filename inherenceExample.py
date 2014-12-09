@@ -17,8 +17,6 @@ class Parent():
                '\tvars:\n\t\t{0}\n' \
                '\tmethods:\n\t\t{1}\n'.format(', '.join(varNames),
                                               ', '.join(methodNames))
-#               '\tparentVar:{0.parentVar!r},' \
-#               '\tparentVarPoliMorph: {0.parentVarPolimorph!r}'.format(self)
 
     # This should be reimplemented by the subclasses
     def __str__(self):
@@ -28,7 +26,7 @@ class Parent():
 
 class ChildImplemetnation(Parent):
     def __init__(self):
-        Parent.__init__(self)
+        super(ChildImplemetnation,self).__init__()
         self.parentVarPolimorph = 'child modification'
         self.childVar = 'child own variable'
         return None
@@ -41,7 +39,7 @@ class ChildImplemetnation(Parent):
 
 class Child(ChildImplemetnation):
     def __init__(self):
-        Parent.__init__(self)
+        super(Child, self).__init__()
         self.parentVarPolimorph = 'child A modification'
         self.childVar = 'child A modification'
         return None
@@ -54,14 +52,16 @@ class Child(ChildImplemetnation):
 
 class ChildExtra(ChildImplemetnation):
     def __init__(self):
-        Parent.__init__(self)
+        super(ChildExtra, self).__init__()
         self.childExtraVar = 'child B own variable'
         return None
 
     def __str__(self):
-        return 'childExtra method: (parentVar:{0.parentVar!s}, ' \
-               '\tparentVarPolimorph: {0.parentVarPolimorph!s}' \
-               '\tchildExtraVar: {0.childExtraVar!s})'.format(self)
+        return 'childExtra method: (\n {1}\n'\
+               '\tchildExtraVar: {0.childExtraVar!s})'.format(
+                self,
+                super(ChildExtra, self).__str__()
+                )
 
 
 p = Parent()
@@ -69,8 +69,14 @@ cI = ChildImplemetnation()
 cA = Child()
 cB = ChildExtra()
 
-p
+print p.__repr__()
+print cI.__repr__()
+print cA.__repr__()
+print cB.__repr__()
+
 print p
 print cI
 print cA
 print cB
+
+
