@@ -1,30 +1,22 @@
-class Parent():
+class A():
     def __init__(self):
-        self.parentVar = 'parent variable to not touch'
-        self.parentVarPolimorph = 'parent variable to touch'
-        return None
+        self.aVar = 'A'         # This is managed by A class 
+        self.aMorphVar = 'A'    # Subclass should modify it
 
     # This method should be able to be called from all children
     def __repr__(self):
-        varNames = []
-        methodNames = []
-        for element in dir(self):
-            if not callable(getattr(self, element)):
-                varNames.extend([element])
-            else:
-                methodNames.extend([element])
-        return 'Representation(Parent method):\n' \
-               '\tvars:\n\t\t{0}\n' \
-               '\tmethods:\n\t\t{1}\n'.format(', '.join(varNames),
-                                              ', '.join(methodNames))
+        return 'method in class A:\n' \
+               ' - Elements:\n\t{0}\n'
+               ' - Variables:\n\t{1}\n'
+               ' - Methods:\n\t{2}\n'.format(1,2,3)
 
     # This should be reimplemented by the subclasses
     def __str__(self):
-        return 'Parent method: (parentVar:{0.parentVar!s}, ' \
+        return 'A method: (parentVar:{0.parentVar!s}, ' \
                '\tparentVarPoliMorph: {0.parentVarPolimorph!s})'.format(self)
 
 
-class ChildImplemetnation(Parent):
+class ChildImplemetnation(A):
     def __init__(self):
         super(ChildImplemetnation,self).__init__()
         self.parentVarPolimorph = 'child modification'
@@ -64,7 +56,7 @@ class ChildExtra(ChildImplemetnation):
                 )
 
 
-p = Parent()
+p = A()
 cI = ChildImplemetnation()
 cA = Child()
 cB = ChildExtra()
