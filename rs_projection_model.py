@@ -1,0 +1,2 @@
+class ProjectionModel(object):
+    pass
