@@ -141,7 +141,9 @@ class MultiVariatedGaussianModel(IDataSimulationModel):
 
 class DataSimulation(object):
 
-    """Docstring for DataSimulation. """
+    """Docstring for DataSimulation.
+    This should be a subclass of a generic Data class.
+    """
 
     def __init__(self, randomSeed=140589, numSamplesPerModel=100):
         """TODO: Generate separable colors for each Data class, here are links
