@@ -5,8 +5,8 @@ from sklearn.decomposition import PCA
 from abc import ABCMeta, abstractmethod, abstractproperty
 
 import math
-import data
-import random_sampling
+from data import *
+from random_sampling import *
 import matplotlib.pyplot as plt
 
 x = DataSimulation(randomSeed=15031984)

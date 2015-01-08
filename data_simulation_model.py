@@ -15,15 +15,13 @@ class IDataSimulationModel(object):
     # information about abstract classes
     #  http://tinyurl.com/l3awj4d
     __metaclass__ = ABCMeta
-    __slots__ = ["_dataClass"]
 
     @abstractmethod
-    def __init__(self, _dataClass='black', *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         # information in pytonic constructors:
         #  http://tinyurl.com/3758j8u
         #  http://tinyurl.com/424tbt7
         #  http://tinyurl.com/lrownat
-        self._dataClass = _dataClass
         return self
 
     def __str__(self):
@@ -39,16 +37,6 @@ class IDataSimulationModel(object):
     def data_model_information(self):
         """This method returns the creation parameters of the object"""
         pass
-
-    @classmethod
-    @property
-    def _dataClass(self):
-        """The colour is considered the label of the data"""
-        return self._dataClass
-#
-#    @_dataClass.setter
-#    def _dataClass(self, value):
-#        self._dataClass = value
 
 
 class MultiVariatedGaussianModel(IDataSimulationModel):
@@ -84,13 +72,13 @@ class MultiVariatedGaussianModel(IDataSimulationModel):
         # kwargs -- dictionary of named arguments
         extraNamedArguments = kwargs.viewkeys() - {'modelSigmaXY',
                             'modelSigmaX', 'modelSigmaY', 'modelMuY',
-                            'modelMuX', 'cataClass'}
+                            'modelMuX', 'dataClass'}
         if extraNamedArguments:
             raise Exception("Invalid args: " + ', '.join(extraNamedArguments))
         elif len(args) > 6:
             raise Exception("Too many anonymous arguments")
         else:
-            defaultValues = [0, 0, 1, 1, 0]
+            defaultValues = [0, 0, 1, 1, 0, None]
             args = list(args)
             args.extend(defaultValues[len(args):])
             self.modelMuX     = kwargs.pop('modelMuX',     args[0])
@@ -98,6 +86,8 @@ class MultiVariatedGaussianModel(IDataSimulationModel):
             self.modelSigmaX  = kwargs.pop('modelSigmaX',  args[2])
             self.modelSigmaY  = kwargs.pop('modelSigmaY',  args[3])
             self.modelSigmaXY = kwargs.pop('modelSigmaXY', args[4])
+            #self._dataClass   = kwargs.pop('dataClass',    args[5])
+            #setDataClass(self,kwargs.pop('dataClass',    args[5]))
 
     def data_model_information(self):
         """Returns the information of the multi-variate 2D Gaussian Model in a
@@ -126,3 +116,19 @@ class MultiVariatedGaussianModel(IDataSimulationModel):
 
     def draw_model(self, axisId):
         pass
+
+    def getDataClass(self):
+        return self._dataClass
+
+    def setDataClass(self, newClass):
+        self._dataClass = newClass
+
+    def delDataClass(self):
+        self._dataClass = None
+
+#    _dataClass = property(getDataClass,
+#                          setDataClass,
+#                          delDataClass,
+#                          "_dataClass is the DataClassInstance object "\
+#                          "associated to the data simulation model instance."\
+#                          "It is mainly used to format plots")
