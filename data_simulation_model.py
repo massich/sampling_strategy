@@ -1,4 +1,5 @@
 from abc import ABCMeta, abstractmethod
+import numpy as np
 
 
 class IDataSimulationModel(object):
@@ -24,18 +25,18 @@ class IDataSimulationModel(object):
         #  http://tinyurl.com/lrownat
         self._dataClass = dataClass
 
-    def getDataClass(self):
+    def get_data_class(self):
         return self._dataClass
 
-    def setDataClass(self, value):
+    def set_data_class(self, value):
         self._dataClass = value
 
-    def delDataClass(self):
+    def del_data_class(self):
         self._dataClass = None
 
     # TODO: I don't understand why I cant assign it to _dataClass
     #       or why this appears as a variable
-    dataClass = property(getDataClass, setDataClass, delDataClass,
+    dataClass = property(get_data_class, set_data_class, del_data_class,
                          ['_dataClass is the DataClassInstance object '
                           'associated to the data simulation model instance.\n'
                           'It is mainly used to format plots'])
@@ -129,8 +130,14 @@ class MultiVariatedGaussianModel(IDataSimulationModel):
                '\n'.format(self.modelMuX, self.modelMuY, self.modelSigmaX,
                            self.modelSigmaY, self.modelSigmaXY)
 
-    def generate_data(sef, numSamples):
-        pass
+    def generate_data(self, numSamples):
+        muX     = self.modelMuX
+        muY     = self.modelMuY
+        sigmaX  = self.modelSigmaX
+        sigmaY  = self.modelSigmaY
+        sigmaXY = self.modelSigmaXY
+        return np.random.multivariate_normal(
+            [muX, muY], [[sigmaX, sigmaXY], [sigmaXY, sigmaY]], numSamples)
 
     def draw_model(self, axisId):
         pass
