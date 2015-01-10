@@ -67,7 +67,7 @@ class DataSimulation(object):
         for currentClass, currentModel, numSamples in buildParam:
             data.append(
                 DataContainer(dataClass=currentClass, dataModel=currentModel,
-                              data=currentModel.generate_data(numSamples))
+                              dataSamples=currentModel.generate_data(numSamples))
             )
         self._data = data
 

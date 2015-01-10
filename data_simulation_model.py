@@ -145,6 +145,9 @@ class MultiVariatedGaussianModel(IDataSimulationModel):
         sigmaXY = self.modelSigmaXY
         return np.random.multivariate_normal(
             [muX, muY], [[sigmaX, sigmaXY], [sigmaXY, sigmaY]], numSamples)
+            
+    def get_data_canvas_limit(sef):
+        pass
 
     def draw_model(self, axisId):
         pass

@@ -10,10 +10,10 @@ from random_sampling import *
 import matplotlib.pyplot as plt
 
 x = DataSimulation(randomSeed=15031984)
-yy = x._models.pop('blue')
-print yy
+#yy = x._models.pop('blue')
+#print yy
 
-print yy.data_model_information()
+#print yy.data_model_information()
 print x
 
 # print 'From the Datasimulation Default'
