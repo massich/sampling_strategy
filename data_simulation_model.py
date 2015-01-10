@@ -45,12 +45,19 @@ class IDataSimulationModel(object):
     def __str__(self):
         pass
 
+    @abstractmethod
     def generate_data(self, numSamples):
         pass
 
+    @abstractmethod
+    def get_data_canvas_limit(sef):
+        pass
+
+    @abstractmethod
     def draw_model(self, axisId):
         pass
 
+    @abstractmethod
     def data_model_information(self):
         """This method returns the creation parameters of the object"""
         pass
