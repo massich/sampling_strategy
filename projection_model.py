@@ -1,6 +1,7 @@
 
 
 import numpy as np
+from fiters import *
 
 class ProjectionModel(object):
 
@@ -22,15 +23,11 @@ class ProjectionModel(object):
         elif projection_type == 'LDA':
             print('Not implemented')
 
-        elif projection_type == 'PCL':
-            self._fiter = fiterPCL()
+        elif projection_type == 'PCA':
+            self._fiter = FiterPCA(data)
 
         else:
             print('are you fucikng kiding me?!')
-
-
-
-        self._projection_matrix = self._fiter.get_projection_matrix(data)
 
 
     def project_data(self, data):
@@ -40,6 +37,21 @@ class ProjectionModel(object):
         :returns: projected points into an unidimencional space
 
         """
+        return self._fiter.project_data(data)
 
-        return self._projection_matrix * data.T()
+
+def main():
+
+    """
+        Tests
+    """
+
+    data = np.array([[1,2,3,4,5], [1,2,3,4,5]]).T
+    my_projection_model = ProjectionModel('PCA',data)
+
+    data_projected = my_projection_model.project_data(data)
+    print(data_projected)
+
+if __name__ == '__main__':
+    main()
 
