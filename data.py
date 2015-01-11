@@ -26,8 +26,7 @@ class DataClasses(object):
 
 class DataContainer(object):
     """TODO: Generate separable colours and names for each Data class,
-    here are links
-    in distinguishable palettes.
+    here are links in distinguishable palettes.
     http://tinyurl.com/okr6bmo
     http://tinyurl.com/m89l48u
     http://tinyurl.com/llay7xa
