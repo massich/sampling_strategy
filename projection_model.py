@@ -40,6 +40,15 @@ class ProjectionModel(object):
         return self._fiter.project_data(data)
 
 
+    def display_base(self, axisId):
+        """Plots one dimensiona line where data is projected
+
+        :axisId: axis to plot on
+
+        """
+        self._fiter.display_base(axisId)
+
+
 def main():
 
     """

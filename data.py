@@ -100,8 +100,6 @@ class DataSimulation(object):
 
         """
 
-        print(self._data[0]._class._color)
-
         for i in range(len(self._data)):
             axisId.scatter(
                     self._data[i].get_samples_dim(0),
