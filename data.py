@@ -43,6 +43,12 @@ class DataContainer(object):
             warnings.warn(["the supplied data samples has no len() method. \n"
                            "Therefore, empty list is assumed"], RuntimeWarning)
 
+    def get_samples_range(self):
+        """ get_samples_range retoruns [xmin, xmax, ymin, ymax] of the samples
+        """
+        return [min(self._samples[:, 0]), max(self._samples[:, 0]),
+                min(self._samples[:, 1]), max(self._samples[:, 1])]
+
 
     def get_samples_dim(self, dimension):
         """Retruns one dimension values of the samples.
@@ -74,7 +80,7 @@ class DataSimulation(object):
 
         # Creates two classes (hardcoded?) super hard coded
         classes = DataClasses()
-        numSamplesPerModel = [300] * len(classes)
+        numSamplesPerModel = [3] * len(classes)
         MVGaussMod = MultiVariatedGaussianModel
         models = [MVGaussMod(0, 1, 1.2, 1, 0.8, dataClass=classes[0]),
                   MVGaussMod(0, 0, 1.3, 0.7, 0.3, dataClass=classes[1])]
@@ -93,13 +99,21 @@ class DataSimulation(object):
     def __str__(self):
         return 'This is a fucking shit'
 
+    def data_range(self):
+        """ data_range returns the [xmin xmax ymin ymax] needed to display the 
+        data
+        """
+        # I don't understand how to do this whithout numpy.
+        cBoundaries = np.asarray([c.get_samples_range() for c in self._data])
+        return [min(cBoundaries[:, 0]), max(cBoundaries[:, 1]),
+                min(cBoundaries[:, 2]), max(cBoundaries[:, 3])]
+
     def draw_sample(self, axisId):
         """Draws 2D points on the axis
 
         :axisId: axis to draw on
 
         """
-
         for i in range(len(self._data)):
             axisId.scatter(
                     self._data[i].get_samples_dim(0),
@@ -119,11 +133,12 @@ def main():
 
     fig.show()
 
-import numpy as np
-import matplotlib.pyplot as plt
-import matplotlib.mlab as mlab
-from sklearn.decomposition import PCA
-from abc import ABCMeta, abstractmethod, abstractproperty
+    x = DataSimulation()
+    yy = x.data_range()
+    print yy
+    print type(yy)
+    print yy
+    print 'puta'
 
 import math
 from data import *

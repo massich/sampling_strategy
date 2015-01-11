@@ -14,7 +14,7 @@ x = DataSimulation(randomSeed=15031984)
 
 # Show the data
 fig = plt.figure()
-ax1 = fig.add_subplot(111)
+ax1 = fig.add_subplot(221)
 #ax1.axis(x.data_range())
 x.draw_sample(ax1)
 #fig.show()
