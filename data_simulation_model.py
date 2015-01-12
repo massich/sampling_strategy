@@ -1,5 +1,7 @@
 from abc import ABCMeta, abstractmethod
 import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib.mlab as mlab
 
 
 class IDataSimulationModel(object):
@@ -50,15 +52,11 @@ class IDataSimulationModel(object):
         pass
 
     @abstractmethod
-    def get_data_canvas_limit(sef):
+    def draw(self, axisId):
         pass
 
     @abstractmethod
-    def draw_model(self, axisId):
-        pass
-
-    @abstractmethod
-    def data_model_information(self):
+    def get_model_information(self):
         """This method returns the creation parameters of the object"""
         pass
 
@@ -116,7 +114,7 @@ class MultiVariatedGaussianModel(IDataSimulationModel):
             self.modelSigmaY  = kwargs.pop('modelSigmaY',  args[3])
             self.modelSigmaXY = kwargs.pop('modelSigmaXY', args[4])
 
-    def data_model_information(self):
+    def get_model_information(self):
         """Returns the information of the multi-variate 2D Gaussian Model in a
         tuple as follows:
         (className, label/colour, xMean, yMean, xSTD, ySTD, xySTD)
@@ -145,9 +143,23 @@ class MultiVariatedGaussianModel(IDataSimulationModel):
         sigmaXY = self.modelSigmaXY
         return np.random.multivariate_normal(
             [muX, muY], [[sigmaX, sigmaXY], [sigmaXY, sigmaY]], numSamples)
-            
-    def get_data_canvas_limit(sef):
-        pass
 
-    def draw_model(self, axisId):
-        pass
+    def draw(self, axisId):
+        # collect needed parameters: plot color, range, etc.
+        try:
+            modelColor = self.get_data_class()._color
+        except Exception:
+            modelColor = '#000000'
+
+        aLimits = axisId.axis()
+        delta = (aLimits[1] - aLimits[0])/100
+        X, Y = np.meshgrid(np.arange(aLimits[0], aLimits[1], delta),
+                           np.arange(aLimits[0], aLimits[1], delta))
+        Z = mlab.bivariate_normal(X, Y, self.modelSigmaX, self.modelSigmaY,
+                                  self.modelMuX, self.modelMuY,
+                                  self.modelSigmaXY)
+
+        axisId.contour(X, Y, Z/Z.max(),
+                       4, # 4 isolines
+                       linewidths=np.arange(.5, 2, .25),
+                       colors=modelColor)
