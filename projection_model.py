@@ -1,44 +1,34 @@
-
-
 import numpy as np
-from fiters import *
+from sklearn.decomposition import PCA
 
-class ProjectionModel(object):
 
-    """This class creates a projection function onto a one dimensional space"""
+class ProjectionModelSingleFeat(object):
 
-    def __init__(self, projection_type, data):
-        """TODO: to be defined1.
+    """Docstring for ProjectionModelSingleFeat. """
 
-        :projection_type: 'SingleFeat' -> Not implemented
-                          'LDA' -> I don't know what this is
-                          'PCA' -> Projects onto the first principal axis
-        :data: Data to generate the model
+    def __init__(self):
+        """TODO: to be defined1. """
 
-        """
 
-        if projection_type == 'SingleFeat':
-            print('Not implemented')
+class ProjectionModelLDA(object):
 
-        elif projection_type == 'LDA':
-            print('Not implemented')
+    """Docstring for ProjectionModelLDA. """
 
-        elif projection_type == 'PCA':
-            self._fiter = FiterPCA(data)
+    def __init__(self):
+        """TODO: to be defined1. """
 
-        else:
-            print('are you fucikng kiding me?!')
 
+class ProjectionModelPCA(object):
+
+    """Docstring for fiterPCL. """
+
+    def __init__(self, data):
+        """TODO: to be defined1. """
+        num_dims_to_keep = 2
+        self._transformation = PCA(n_components=num_dims_to_keep).fit(data)
 
     def project_data(self, data):
-        """ Project this data with the known projection model
-
-        :data: set of point
-        :returns: projected points into an unidimencional space
-
-        """
-        return self._fiter.project_data(data)
-
+        return self._transformation.transform(data)
 
     def display_base(self, axisId):
         """Plots one dimensiona line where data is projected
@@ -46,21 +36,38 @@ class ProjectionModel(object):
         :axisId: axis to plot on
 
         """
-        self._fiter.display_base(axisId)
+        base = np.array([[-1, 1, 0, 0], [0, 0, -1, 1]]).T
+        base_projected = self._transformation.transform(6*base)
+
+        print('projected base')
+        print(base_projected)
+
+        x, y = base_projected.T
+        axisId.plot(x[0:2], y[0:2], 'k-', linewidth=2)
+        axisId.plot(x[2:4], y[2:4], 'k-', linewidth=2)
 
 
 def main():
-
     """
         Tests
     """
 
-    data = np.array([[1,2,3,4,5], [1,2,3,4,5]]).T
-    my_projection_model = ProjectionModel('PCA',data)
+    import matplotlib.pyplot as plt
 
-    data_projected = my_projection_model.project_data(data)
+    data = np.array([[1, 2, 3, 4, 5], [1, 2, 3, 4, 5]]).T
+    print(data.shape)
+    print(data)
+
+    my_projMod = ProjectionModelPCA(data)
+    data_projected = my_projMod.project_data(data)
+
+    print('projected data:')
     print(data_projected)
+
+    fig = plt.figure()
+    axis = fig.add_subplot(111)
+    my_projMod.display_base(axis)
+    fig.show()
 
 if __name__ == '__main__':
     main()
-
