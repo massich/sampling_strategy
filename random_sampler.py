@@ -1,10 +1,11 @@
 from data import *
+from data_simulation_model import *
 from rs_projection_model import *
 
 
 class RandomSampler(object):
     """ RandomSamplier :
-        1 - projects the data into lower dimension space based on a 
+        1 - projects the data into lower dimension space based on a
             projection model.
         2 - based on a sampling model generates a collection of randomly
             selected subsets.

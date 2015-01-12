@@ -64,7 +64,6 @@ class DataContainer(object):
             return np.array([])
 
 
-
 class DataSimulation(object):
     """Docstring for DataSimulation.
     This should be a subclass of a generic Data class.
@@ -153,11 +152,11 @@ def main():
 
     fig, ax0 = plt.subplots(nrows=1)
 
-    my_data = DataSimulation()
+    my_data = DataSimulation(n=10)
     print(my_data)
     print(my_data.get_all_data())
-    ax0.axis(my_data.get_range())
-#    ax0.axis([-3, 3, -3, 3])
+#    ax0.axis(my_data.get_range())
+    ax0.axis([-3, 3, -3, 3])
     my_data.draw_samples(ax0)
     my_data.draw_models(ax0)
 
