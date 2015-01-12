@@ -30,7 +30,7 @@ class ProjectionModelPCA(object):
     def project_data(self, data):
         return self._transformation.transform(data)
 
-    def display_base(self, axisId):
+    def display_base(self, axisId, lineW=2):
         """Plots one dimensiona line where data is projected
 
         :axisId: axis to plot on
@@ -43,8 +43,8 @@ class ProjectionModelPCA(object):
         print(base_projected)
 
         x, y = base_projected.T
-        axisId.plot(x[0:2], y[0:2], 'k-', linewidth=2)
-        axisId.plot(x[2:4], y[2:4], 'k-', linewidth=2)
+        axisId.plot(x[0:2], y[0:2], 'k-', linewidth=lineW)
+        axisId.plot(x[2:4], y[2:4], 'k-', linewidth=lineW)
 
 
 def main():

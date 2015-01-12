@@ -69,7 +69,7 @@ class DataSimulation(object):
     """Docstring for DataSimulation.
     This should be a subclass of a generic Data class.
     """
-    def __init__(self, randomSeed=140589):
+    def __init__(self, randomSeed=140589, n=3):
         """
         :randomSeed: TODO
         :models: TODO parametrize
@@ -80,7 +80,7 @@ class DataSimulation(object):
 
         # Creates two classes (hardcoded?) super hard coded
         classes = DataClasses()
-        numSamplesPerModel = [3] * len(classes)
+        numSamplesPerModel = [n] * len(classes)
         MVGaussMod = MultiVariatedGaussianModel
         models = [MVGaussMod(0, 1, 1.2, 1, 0.8, dataClass=classes[0]),
                   MVGaussMod(0, 0, 1.3, 0.7, 0.3, dataClass=classes[1])]
