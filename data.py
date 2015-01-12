@@ -80,7 +80,7 @@ class DataSimulation(object):
 
         # Creates two classes (hardcoded?) super hard coded
         classes = DataClasses()
-        numSamplesPerModel = [300] * len(classes)
+        numSamplesPerModel = [3] * len(classes)
         MVGaussMod = MultiVariatedGaussianModel
         models = [MVGaussMod(0, 1, 1.2, 1, 0.8, dataClass=classes[0]),
                   MVGaussMod(0, 0, 1.3, 0.7, 0.3, dataClass=classes[1])]
@@ -140,6 +140,12 @@ class DataSimulation(object):
         for d in self._data:
             d._model.draw(axisId)
 
+    def get_all_data(self):
+        return np.concatenate(
+            list(d._samples for d in self._data),
+            axis=0
+        )
+
 
 def main():
 
@@ -149,6 +155,7 @@ def main():
 
     my_data = DataSimulation()
     print(my_data)
+    print(my_data.get_all_data())
     ax0.axis(my_data.get_range())
 #    ax0.axis([-3, 3, -3, 3])
     my_data.draw_samples(ax0)
