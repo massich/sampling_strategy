@@ -2,28 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.mlab as mlab
 from sklearn.decomposition import PCA
-from abc import ABCMeta, abstractmethod
-import math
-
-
-class DataSimulationModel(object):
-    """ This is the real data D class for the case of simulation.
-        The simulated data can be drawn from different models which are
-        intended to inherit from this this class. Each model should :
-          -understand its own building parameters or through an error.
-          -implement the abstractmethods
-    """
-    __metaclass__ = ABCMeta
-
-    @abstractmethod
-    def __init__(self, *args, **kwargs):
-        print "this is the abstract class constructor"
-
-    def __str__(self):
-        pass
-
-    def generate_data(self, numSamples):
-        pass
+from abc import ABCMeta, abstractmethod, abstractproperty
 
     def draw_model(self, axisId):
         pass
@@ -41,3 +20,31 @@ class MultiVariatedGaussianModel(DataSimulationModel):
 
     def draw_model(self, axisId):
         pass
+=======
+from abc import ABCMeta, abstractmethod, abstractproperty
+
+import math
+from data import *
+from random_sampling import *
+import matplotlib.pyplot as plt
+
+x = DataSimulation(randomSeed=15031984)
+yy = x._models.pop('blue')
+print yy
+
+print yy.data_model_information()
+print x
+
+# print 'From the Datasimulation Default'
+# x = DataSimulation()
+# print x._models[0]
+# print x._models[1]
+#
+# print 'From a created string'
+# xx = ' '
+# for puta in self._models:
+#     xx.join('{0} \n in colour {1} with {2} samples'.format(
+#              puta.__str__, 'red',
+#              self._numSamplesPerModel))
+# print xx
+>>>>>>> feature/abstractSimulationModel
