@@ -3,6 +3,23 @@ from data_simulation_model import *
 from rs_projection_model import *
 
 
+class DataProjectionInstance(DataSimulation):
+    """ DataProjectionInstance takes a Data object and rewrites its generative
+    methods in order to output projected data
+    """
+
+    def __init__(self, data, projectionModel):
+        """TODO: The constructor should validate that the projectionModel has a
+        method transform so that the method decorations work as expected.
+
+        :data: TODO
+        :projectionModel: TODO
+
+        """
+        self._data = data
+        self._projectionModel = projectionModel
+
+
 class RandomSampler(object):
     """ RandomSamplier :
         1 - projects the data into lower dimension space based on a

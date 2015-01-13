@@ -20,8 +20,8 @@ class DataClasses(object):
         return [DataClassInstance('blue', '#9b59b6'),
                 DataClassInstance('red', '#e74c3c')]
 
-        def get_class_names(self):
-            list(currentClass._name for currentClass in self)
+    def get_class_names(self):
+        list(currentClass._name for currentClass in self)
 
 
 class DataContainer(object):
