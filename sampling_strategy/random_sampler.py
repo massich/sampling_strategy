@@ -16,8 +16,13 @@ class DataProjectionInstance(DataSimulation):
         :projectionModel: TODO
 
         """
-        self._data = data
+        self = data
         self._projectionModel = projectionModel
+
+    def get_data_Projected(self):
+        for index in range(len(self._data)):
+            yield self._projectionModel.project_data(
+                self._data[index]._samples)
 
 
 class RandomSampler(object):
@@ -49,12 +54,12 @@ class RandomSampler(object):
 def main():
 
     import matplotlib.pyplot as plt
-    fig, ax = plt.subplots(nrows=2, ncols=2)
+    fig, ax = plt.subplots(nrows=2, ncols=3)
 
-    my_data = DataSimulation(n=100)
-    my_ax = [ax[0][0], ax[0][1], ax[1][0]]
+    my_data = DataSimulation(n=10)
+    my_ax = [ax[0][0], ax[0][1], ax[0][2]]
     for ax0 in my_ax:
-        ax0.axis(my_data.get_range())
+        ax0.axis([-3, 3, -3, 3])
         my_data.draw_samples(ax0)
         my_data.draw_models(ax0)
 
