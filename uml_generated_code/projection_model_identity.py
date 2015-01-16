@@ -6,7 +6,7 @@ class ProjectionModelIdentity (IProjectionModel):
      ProjectionModelIdentity does no projection to the data
 
     :version:
-    :author:
+    :author: sik
     """
 
     def __init__(self, featureIndx):
@@ -15,7 +15,7 @@ class ProjectionModelIdentity (IProjectionModel):
 
         @param string featureIndx : 
         @return  :
-        @author
+        @author sik
         """
         pass
 
@@ -26,7 +26,7 @@ class ProjectionModelIdentity (IProjectionModel):
         @param string axisId : 
         @param string lineW : 
         @return  :
-        @author
+        @author sik
         """
         pass
 
@@ -36,7 +36,7 @@ class ProjectionModelIdentity (IProjectionModel):
 
         @param string dataPoints : 
         @return  :
-        @author
+        @author sik
         """
         pass
 

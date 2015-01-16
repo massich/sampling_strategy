@@ -12,7 +12,7 @@ class IProjectionModel (object):
      output projected data
 
     :version:
-    :author:
+    :author: sik
     """
 
     def __init__(self, db = None):
@@ -21,7 +21,7 @@ class IProjectionModel (object):
 
         @param DataBase db : is used to instanciate the projection. db is used to determine the projection parameters.
         @return string :
-        @author
+        @author sik
         """
         pass
         
@@ -37,7 +37,7 @@ class IProjectionModel (object):
 
         @param string axisId : axis to plot on
         @return mlpAxis :
-        @author
+        @author sik
         """
         pass
         
@@ -53,7 +53,7 @@ class IProjectionModel (object):
 
         @param nparray dataPoints : 
         @return nparray :
-        @author
+        @author sik
         """
         pass
         
@@ -69,7 +69,7 @@ class IProjectionModel (object):
 
         @param DataBase db : 
         @return nparray :
-        @author
+        @author sik
         """
         pass
 

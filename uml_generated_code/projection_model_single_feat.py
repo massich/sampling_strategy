@@ -10,7 +10,7 @@ class ProjectionModelSingleFeat (object, IProjectionModel):
      
 
     :version:
-    :author:
+    :author: sik
     """
 
     def __init__(self, featureIndx):
@@ -19,7 +19,7 @@ class ProjectionModelSingleFeat (object, IProjectionModel):
 
         @param string featureIndx : 
         @return string :
-        @author
+        @author sik
         """
         if featureIndx>1:
           raise'featureIndx should be 0 or 1'
@@ -35,7 +35,7 @@ class ProjectionModelSingleFeat (object, IProjectionModel):
         @param string axisId : 
         @param string lineW : 
         @return string :
-        @author
+        @author sik
         """
         aLimit=axisId.axis()
         if self._featureIndx==0:
@@ -55,7 +55,7 @@ class ProjectionModelSingleFeat (object, IProjectionModel):
 
         @param string dataPoints : 
         @return string :
-        @author
+        @author sik
         """
         return dataPoints[:,self._featureIndx]
         

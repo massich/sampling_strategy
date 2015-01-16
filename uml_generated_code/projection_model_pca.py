@@ -6,7 +6,7 @@ class ProjectionModelPCA (IProjectionModel):
      Docstring for fiterPCL.
 
     :version:
-    :author:
+    :author: sik
     """
 
     def __init__(self, data):
@@ -15,7 +15,7 @@ class ProjectionModelPCA (IProjectionModel):
 
         @param string data : 
         @return  :
-        @author
+        @author sik
         """
         pass
 
@@ -25,7 +25,7 @@ class ProjectionModelPCA (IProjectionModel):
 
         @param string data : 
         @return  :
-        @author
+        @author sik
         """
         pass
 
@@ -36,7 +36,7 @@ class ProjectionModelPCA (IProjectionModel):
         @param string axisId : 
         @param string lineW : 
         @return  :
-        @author
+        @author sik
         """
         pass
 

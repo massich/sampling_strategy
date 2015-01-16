@@ -6,7 +6,7 @@ class DataSet (DataBase):
      
 
     :version:
-    :author:
+    :author: sik
     """
 
     def draw_samples(self, axisId, fade = .5):
@@ -17,7 +17,7 @@ class DataSet (DataBase):
         @param mplAxis axisId : 
         @param float fade : fading ratio
         @return  :
-        @author
+        @author sik
         """
         pass
 

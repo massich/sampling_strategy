@@ -11,7 +11,7 @@ class DataBaseCreator(object):
      data into DataBase object.
 
     :version:
-    :author:
+    :author: sik
     """
 
     def __init__(self, db):
@@ -20,7 +20,7 @@ class DataBaseCreator(object):
 
         @param DataBase db : original DataBase object
         @return DataBase :
-        @author
+        @author sik
         """
         pass
 

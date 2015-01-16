@@ -12,7 +12,7 @@ class RandomSampler (object):
      
 
     :version:
-    :author:
+    :author: sik
     """
 
     def __init__(self, data):
@@ -24,7 +24,7 @@ class RandomSampler (object):
 
         @param string data : 
         @return string :
-        @author
+        @author sik
         """
         self._projectionModel=ProjectionModelPCA(data)
         
@@ -39,7 +39,7 @@ class RandomSampler (object):
         @param string axisId : 
         @param string lineW : 
         @return string :
-        @author
+        @author sik
         """
         self._projectionModel.display_base(axisId,lineW)
         

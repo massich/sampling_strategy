@@ -6,7 +6,7 @@ class SamplingModelEntropy (ISamplingModel):
      
 
     :version:
-    :author:
+    :author: sik
     """
 
 

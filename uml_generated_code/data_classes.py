@@ -1,3 +1,6 @@
+from object import *
+from DataClassInstance import *
+
 class DataClasses (object):
 
     """

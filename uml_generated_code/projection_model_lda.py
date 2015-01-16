@@ -7,7 +7,7 @@ class ProjectionModelLDA (object, IProjectionModel):
      Docstring for ProjectionModelLDA.
 
     :version:
-    :author:
+    :author: sik
     """
 
     def __init__(self):
@@ -15,7 +15,7 @@ class ProjectionModelLDA (object, IProjectionModel):
          TODO: to be defined1.
 
         @return string :
-        @author
+        @author sik
         """
         def display_base(self,axisId):
           pass
@@ -32,7 +32,7 @@ class ProjectionModelLDA (object, IProjectionModel):
          
 
         @return string :
-        @author
+        @author sik
         """
         import matplotlib.pyplot as plt
         data=np.array([[1,2,3,4,5],[1,2,3,4,5]]).T

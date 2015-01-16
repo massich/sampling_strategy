@@ -6,7 +6,7 @@ class MultiVariatedGaussianModel (IDataSimulationModel):
      
 
     :version:
-    :author:
+    :author: sik
     """
 
     """ ATTRIBUTES
@@ -39,7 +39,7 @@ class MultiVariatedGaussianModel (IDataSimulationModel):
 
         @param int numSamples : 
         @return nparray :
-        @author
+        @author sik
         """
         pass
 

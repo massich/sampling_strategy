@@ -8,7 +8,7 @@ class IDataSimulationModel (object, IDataModel):
      
 
     :version:
-    :author:
+    :author: sik
     """
 
     def __init__(self, dataClass):
@@ -18,7 +18,7 @@ class IDataSimulationModel (object, IDataModel):
 
         @param string dataClass : 
         @return IDataSimulationModel :
-        @author
+        @author sik
         """
         self._dataClass=dataClass
         
@@ -29,7 +29,7 @@ class IDataSimulationModel (object, IDataModel):
          
 
         @return string :
-        @author
+        @author sik
         """
         pass
         
@@ -41,7 +41,7 @@ class IDataSimulationModel (object, IDataModel):
 
         @param int numSamples : 
         @return nparray :
-        @author
+        @author sik
         """
         pass
         
@@ -52,7 +52,7 @@ class IDataSimulationModel (object, IDataModel):
          This method returns the creation parameters of the object
 
         @return string :
-        @author
+        @author sik
         """
         pass
         

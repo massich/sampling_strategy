@@ -8,7 +8,7 @@ class IDataModel(object):
      models used to generate data or those calculated from data
 
     :version:
-    :author:
+    :author: sik
     """
 
     def __init__(self):
@@ -17,7 +17,7 @@ class IDataModel(object):
          http://tinyurl.com/424tbt7  http://tinyurl.com/lrownat
 
         @return IDataModel :
-        @author
+        @author sik
         """
         pass
 
@@ -27,7 +27,7 @@ class IDataModel(object):
          
 
         @return string :
-        @author
+        @author sik
         """
         pass
 
@@ -43,7 +43,7 @@ class IDataModel(object):
         @param mplAxis axisId : 
         @param string color : the iso-value lines are painted acordingly to color
         @return  :
-        @author
+        @author sik
         """
         pass
 

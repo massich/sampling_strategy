@@ -10,7 +10,7 @@ class DataSimulation (object, DataBaseCreator):
      
 
     :version:
-    :author:
+    :author: sik
     """
 
     def __init__(self, randomSeed):
@@ -21,7 +21,7 @@ class DataSimulation (object, DataBaseCreator):
 
         @param string randomSeed : 
         @return  :
-        @author
+        @author sik
         """
         pass
 
@@ -30,7 +30,7 @@ class DataSimulation (object, DataBaseCreator):
          
 
         @return string :
-        @author
+        @author sik
         """
         modelsInfoString="\t{0}_({1})_________________________\n\t\tmodel:: {2}\n \t\tsamples:: {3}\n \t\trange:: {4}\n"
         modelsInfo=""
@@ -48,7 +48,7 @@ class DataSimulation (object, DataBaseCreator):
           I don't understand how to do this whithout numpy.
 
         @return string :
-        @author
+        @author sik
         """
         cBoundaries=np.asarray([c.get_range()for c in self._data])
         return[min(cBoundaries[:,0]),max(cBoundaries[:,1]),
@@ -60,7 +60,7 @@ class DataSimulation (object, DataBaseCreator):
          
 
         @return string :
-        @author
+        @author sik
         """
         return np.concatenate(
         list(d._samples for d in self._data),axis=0)
@@ -73,7 +73,7 @@ class DataSimulation (object, DataBaseCreator):
          
 
         @return DataBase :
-        @author
+        @author sik
         """
         np.random.seed(randomSeed)
         self._randomSeed=randomSeed

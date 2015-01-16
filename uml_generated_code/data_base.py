@@ -1,4 +1,4 @@
-from DataClassInstance import *
+from data_class_instance import *
 from DataModel import *
 from DataSimulation import *
 from IDataModel import *
@@ -8,12 +8,11 @@ from IProjectionModel import *
 
 
 class DataBase(object):
-
-    """
-     
+    """ DataBase stores the data as 3 dictionaries that can be indexed using
+        the class name
 
     :version:
-    :author:
+    :author: sik
     """
 
     def get_class_names(self):
@@ -21,7 +20,7 @@ class DataBase(object):
          
 
         @return string :
-        @author
+        @author sik
         """
         pass
 
@@ -31,7 +30,7 @@ class DataBase(object):
 
         @param mplAxis axisId : 
         @return  :
-        @author
+        @author sik
         """
         pass
 
@@ -41,7 +40,7 @@ class DataBase(object):
 
         @param mplAxis axisId : 
         @return  :
-        @author
+        @author sik
         """
         pass
 

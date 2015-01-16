@@ -11,7 +11,7 @@ class ISamplingModel (object):
      the data samples to form the dataset based in some criteria.
 
     :version:
-    :author:
+    :author: sik
     """
 
 

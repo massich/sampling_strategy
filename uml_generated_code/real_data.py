@@ -6,7 +6,7 @@ class RealData (DataBaseCreator):
      
 
     :version:
-    :author:
+    :author: sik
     """
 
 

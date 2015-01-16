@@ -1,12 +1,12 @@
 from ISamplingModel import *
 
-class SamplingModelModeGauss (ISamplingModel):
+class SamplingModelHomogeneous (ISamplingModel):
 
     """
      
 
     :version:
-    :author:
+    :author: sik
     """
 
 
