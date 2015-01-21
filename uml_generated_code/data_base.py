@@ -1,10 +1,16 @@
+"""random thoughts - sampling_strategy, support code"""
+import collections
 from data_class_instance import *
-from DataModel import *
-from DataSimulation import *
-from IDataModel import *
-from DataBaseCreator import *
-from RandomSampler import *
-from IProjectionModel import *
+from i_data_model import *
+
+
+DBElement = collections.namedtuple('DBElement', 'class model samples')
+"""Defininition of (class, model, samples) triplet as a nametuple
+
+Note:
+  In ordrder to see the expansion of the class code execute it with the
+  `verbose=True` parameter.
+"""
 
 
 class DataBase(object):
@@ -16,16 +22,12 @@ class DataBase(object):
       dictionary key.
 
     Attributes:
-      self (dictionary of (DataClassInstance, IDataModel, npArray)): each
-        element corresponds to a different group of data within the data base.
+      self (dictionary of DBElement): each element corresponds to a different
+        group of data within the data base.
 
     :version: 0.0.1
     :author: sik
     """
-# >>> t = [(4, 180, 21), (5, 90, 10), (3, 270, 8), (4, 0, 7)]
-# >>> dict([ (k, [v, w]) for k, v, w in t ])
-# {3: [270, 8], 4: [0, 7], 5: [90, 10]}
-#
 
     def __new__(cls):
         return dict()
