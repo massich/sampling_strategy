@@ -1,62 +1,45 @@
-from object import *
-from IDataModel import *
-from DataSimulation import *
+"""random thoughts - sampling_strategy, support code"""
 
-class IDataSimulationModel (object, IDataModel):
+from i_data_model import *
 
-    """
-     
 
-    :version:
+class IDataSimulationModel (IDataModel):
+    """IDataModel is an abstract class to force equal signature between
+    all the data generative models.
+
+    :version: 0.0.1
     :author: sik
     """
+    __metaclass__ = ABCMeta
 
-    def __init__(self, dataClass):
-        """
-          information in pytonic constructors:  http://tinyurl.com/3758j8u 
-         http://tinyurl.com/424tbt7  http://tinyurl.com/lrownat
-
-        @param string dataClass : 
-        @return IDataSimulationModel :
-        @author sik
-        """
-        self._dataClass=dataClass
-        
-
-
+    @abstractmethod
     def __str__(self):
-        """
-         
-
-        @return string :
-        @author sik
-        """
         pass
-        
 
-
+    @abstractmethod
     def generate_data(self, numSamples):
-        """
+        """generate_data generate `numSamples` data points that follow the
+        model described by `self`.
          
+        Args:
+          numSamples (int): Number of samples to generate
 
-        @param int numSamples : 
-        @return nparray :
-        @author sik
+        Returns:
+          nparray: data points in [[x1, y1, ..],[x2, y2, ..]] form
+
+        :version: 0.0.1
+        :author: sik
         """
         pass
-        
 
-
+    @abstractmethod
     def get_model_information(self):
-        """
-         This method returns the creation parameters of the object
+        """get_model_information returns the model parameters dictionary.
 
-        @return string :
-        @author sik
+        Returns:
+          dict: Dictionary of {'parameter':value}
+
+        :version: 0.0.1
+        :author: sik
         """
         pass
-        
-
-
-
-

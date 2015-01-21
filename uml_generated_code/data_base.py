@@ -57,14 +57,12 @@ class DataBase(dict):
 
     def draw_samples(self, axisId):
         """
-         
 
         @param mplAxis axisId : 
         @return  :
         @author sik
         """
         pass
-
 
 
 def _test():
@@ -81,8 +79,6 @@ def _test():
 
     for k in myDBElementDictionary.iterkeys():
         assert dd[k] == myDBElementDictionary[k]
-#    print dd
-#
 
 if __name__ == '__main__':
     _test()
