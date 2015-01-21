@@ -1,10 +1,11 @@
 """random thoughts - sampling_strategy, support code"""
+
 import collections
 from data_class_instance import *
-from i_data_model import *
+# from i_data_model import *
 
 
-DBElement = collections.namedtuple('DBElement', 'class model samples')
+DBElement = collections.namedtuple('DBElement', 'dbeClass dbeModel dbeSamples')
 """Defininition of (class, model, samples) triplet as a nametuple
 
 Note:
@@ -13,7 +14,7 @@ Note:
 """
 
 
-class DataBase(object):
+class DataBase(dict):
     """DataBase is a (class, model, samples) triplet diccionary that can be
     accessed using the class name of the data.
     
@@ -29,21 +30,24 @@ class DataBase(object):
     :author: sik
     """
 
-    def __new__(cls):
-        return dict()
+    def __init__(self, dbelementList):
+        """__init__ constructs a DataBase from the given parameters.(not fully
+        implemnted, yet. Rightnow only accepted parameter is a DBElement list
+        to be passed to the dict default __init__)
 
-    def get_class_names(self):
-        """
-         
+        TODO: 
+          this method should be overloaded in order to take diferent
+          instanciations
 
-        @return string :
-        @author sik
+        :version: 0.0.1
+        :author: sik
         """
-        pass
+        super(self.__class__, self).__init__(
+            zip([e.dbeClass for e in dbelementList], dbelementList)
+        )
 
     def draw_models(self, axisId):
         """
-         
 
         @param mplAxis axisId : 
         @return  :
@@ -63,3 +67,22 @@ class DataBase(object):
 
 
 
+def _test():
+    """ test function to call when executing this file directly """
+    xx = [DBElement(dbeClass='c1', dbeModel='model', dbeSamples=[0, 1]),
+          DBElement(dbeClass='c2', dbeModel='model', dbeSamples=[0, 1]),
+          DBElement(dbeClass='c3', dbeModel='model', dbeSamples=[0, 1]),
+          DBElement(dbeClass='c4', dbeModel='model', dbeSamples=[0, 1]),
+          DBElement(dbeClass='c5', dbeModel='model', dbeSamples=[0, 1]),
+          DBElement(dbeClass='c6', dbeModel='model', dbeSamples=[0, 1])]
+
+    myDBElementDictionary = dict(zip([x.dbeClass for x in xx], xx))
+    dd = DataBase(xx)
+
+    for k in myDBElementDictionary.iterkeys():
+        assert dd[k] == myDBElementDictionary[k]
+#    print dd
+#
+
+if __name__ == '__main__':
+    _test()
