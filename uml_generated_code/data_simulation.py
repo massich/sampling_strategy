@@ -1,6 +1,5 @@
-from object import *
-from DataBaseCreator import *
-from DataBase import *
+from data_base_creator import *
+from data_base import *
 
 class DataSimulation (object, DataBaseCreator):
 

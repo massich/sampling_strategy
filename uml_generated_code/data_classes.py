@@ -1,5 +1,4 @@
-from object import *
-from DataClassInstance import *
+from data_class_instance import *
 
 class DataClasses (object):
 

@@ -1,6 +1,5 @@
-from object import *
-from RandomSampler import *
-from DataBase import *
+from random_sampler import *
+from data_base import *
 
 class IProjectionModel (object):
 

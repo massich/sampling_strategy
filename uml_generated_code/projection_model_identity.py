@@ -1,4 +1,4 @@
-from IProjectionModel import *
+from i_projection_model import *
 
 class ProjectionModelIdentity (IProjectionModel):
 

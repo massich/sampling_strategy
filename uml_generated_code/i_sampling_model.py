@@ -1,5 +1,4 @@
-from object import *
-from RandomSampler import *
+from random_sampler import *
 
 class ISamplingModel (object):
 
