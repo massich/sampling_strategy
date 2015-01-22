@@ -19,8 +19,7 @@ class DataBase(dict):
     accessed using the class name of the data.
     
     Note:
-      * the names of the data class **must** be unique, since they are used the
-      dictionary key.
+      * the names of the data class **must** be unique, since they are used the dictionary key.
 
     Attributes:
       self (dictionary of DBElement): each element corresponds to a different
