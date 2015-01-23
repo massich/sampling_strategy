@@ -1,5 +1,4 @@
-from object import *
-from IProjectionModel import *
+from i_projection_model import *
 
 class ProjectionModelLDA (object, IProjectionModel):
 

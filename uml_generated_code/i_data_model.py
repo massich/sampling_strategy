@@ -19,8 +19,9 @@ class IDataModel(object):
 
     def __init__(self):
         """ IDataModel.__init__ 
-        TODO: should be an abstractmethod to force implementation? or should I
-        remove the whole thing?
+        .. todo::
+           [design] should be an abstractmethod to force implementation? or
+           should I remove the whole thing?
 
         :version: 0.0.1
         :author: sik
@@ -41,22 +42,28 @@ class IDataModel(object):
         model distribution.
 
         Note:
-          I'm not sure if this function should belong to:
-          * the object, since the model knows all the information about itself
-          * :mod:`sampler_simulation_plot_helper`, since is the collection of
-            plotting functions
-
-        pre: The axis limits should be appropiated to carry the ploting
-        post: the distribution iso-value contours are displayed in axisId
+            * pre-condition: The axis limits should be appropiated to carry the ploting
+            * post-condition: the distribution iso-value contours are displayed in axisId
 
         Args:
-          ax (axes): The axes to draw to
-          dataClass (DataClassInstance): The data class associated to the model
+            ax (axes): The axes to draw to
+            dataClass (DataClassInstance): The data class associated to the model
 
         Returns:
-          list: list of artists added
+            A list of artists added to **ax**
+
+        .. todo::
+           [design] who should belong to the drawing signature?
+        Note:
+            I'm not sure if this function should belong to:
+
+            * the object, since the model knows all the information about itself
+            * :mod:`sampler_simulation_plot_helper`, since is the collection of
+              plotting functions
+
 
         :version: 0.0.1
         :author: sik
         """
+        # TODO(sik) test
         pass

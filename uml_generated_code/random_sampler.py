@@ -1,5 +1,4 @@
-from object import *
-from DataSet import *
+from data_set import *
 
 class RandomSampler (object):
 

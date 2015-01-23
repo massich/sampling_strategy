@@ -1,13 +1,13 @@
-from object import *
-from IProjectionModel import *
+from i_projection_model import *
+
 
 class ProjectionModelSingleFeat (object, IProjectionModel):
 
     """
      ProjectionModelSingleFeat takes a single feature of the data
-     
+
          TODO: right now only handles 2D data and everything is hardcoded
-     
+
 
     :version:
     :author: sik
@@ -15,7 +15,7 @@ class ProjectionModelSingleFeat (object, IProjectionModel):
 
     def __init__(self, featureIndx):
         """
-         
+
 
         @param string featureIndx : 
         @return string :
