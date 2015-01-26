@@ -18,3 +18,26 @@ def my_plotter(ax, data1, data2, param_dict):
     """
     out = ax.plot(data1, data2, **param_dict)
     return out
+
+def foo(bar, baz=None):
+    """
+    This is a prose description of foo and all the great
+    things it does.
+
+    Parameters
+    ----------
+    bar : (type of bar)
+        A description of bar
+
+    baz : (type of baz), optional
+        A description of baz
+
+    Returns
+    -------
+    foobar : (type of foobar)
+        A description of foobar
+    foobaz : (type of foobaz)
+        A description of foobaz
+    """
+    # some very clever code
+    return foobar, foobaz

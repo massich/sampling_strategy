@@ -41,29 +41,28 @@ class IDataModel(object):
         """draw_2Disoc draws iso-value contours in order to illustrate the
         model distribution.
 
-        Note:
-            * pre-condition: The axis limits should be appropiated to carry the ploting
-            * post-condition: the distribution iso-value contours are displayed in axisId
-
         Args:
             ax (axes): The axes to draw to
-            dataClass (DataClassInstance): The data class associated to the model
+            dataClass (DataClassInstance): The data class associated to the \
+                                           model
 
         Returns:
             A list of artists added to **ax**
 
-        .. todo::
-           [design] who should belong to the drawing signature?
+        :rtype: list
+        :version: 0.0.1
+        :author: sik
+
+        Warning:
+            The axis limits are not modified, therefore data might be being
+            ploted **outside** of the visible range.
+
+        .. todo:: **[design]** who should belong to the drawing signature?
         Note:
             I'm not sure if this function should belong to:
 
-            * the object, since the model knows all the information about itself
+            * the object, since it knows all the information about itself
             * :mod:`sampler_simulation_plot_helper`, since is the collection of
               plotting functions
-
-
-        :version: 0.0.1
-        :author: sik
         """
-        # TODO(sik) test
         pass
