@@ -45,6 +45,24 @@ class DataBase(dict):
             zip([e.dbeClass for e in dbelementList], dbelementList)
         )
 
+    def __str__(self):
+        """
+        formated console print of the DataBase object
+
+        .. todo:: [code] This is a copy-paste of the previous code structure
+        :version: 0.0.1
+        :author: sik
+        """
+
+        modelsInfoString="\t{0}_({1})_________________________\n\t\tmodel:: {2}\n \t\tsamples:: {3}\n \t\trange:: {4}\n"
+        modelsInfo=""
+        for d in self._data:
+            modelsInfo+=modelsInfoString.format(
+            d._class._name,d._class._color,d._model.get_model_information(),d._numOfSamples,d.get_range())
+
+        return'Real-Data simulation ({0} Models):\n{1}'.format(
+        len(self._data),modelsInfo)
+
     def draw_models(self, axisId):
         """
 

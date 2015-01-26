@@ -30,6 +30,7 @@ class DataClassInstance(object):
                 no_name.
             color (str, optional): data color identifier. Defaults to #555555
 
+        .. todo:: [design] this class should be a named tupple like DBElement
         """
         self._name = name
         self._color = color
