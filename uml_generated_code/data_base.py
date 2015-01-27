@@ -152,29 +152,19 @@ class DataBase(dict):
 def _test():
     """ test function to call when executing this file directly """
 
-    xx = [DataClassInstance('c{}'.format(i), '#fffff{}'.format(i))
-          for i in range(1, 4)]
-    print xx[0].__class__
+    nTestClasses = 3
+    myClasses = [DataClassInstance('c{}'.format(i), '#fffff{}'.format(i))
+                 for i in range(1, nTestClasses)]
 
-    yy = [DBElement(x, 'model{}'.format(indx+1), np.array([0, indx]))
-          for indx, x in enumerate(xx)]
-    print yy
+    myDBEList = [DBElement(c, 'model_{}'.format(idx+1), np.array([0, idx]))
+                 for idx, c in enumerate(myClasses)]
 
-    dd = DataBase(yy)
+    dd = DataBase(myDBEList)
     print dd
-#    xx = [DBElement(DataClassInstance('c1','#ffffff'), dbeModel='model', dbeSamples=[0, 1]),
-#          DBElement(DataClassInstance('c2','#ffffff'), dbeModel='model', dbeSamples=[0, 1]),
-#          DBElement(DataClassInstance('c3','#ffffff'), dbeModel='model', dbeSamples=[0, 1]),
-#          DBElement(DataClassInstance('c4','#ffffff'), dbeModel='model', dbeSamples=[0, 1]),
-#          DBElement(DataClassInstance('c5','#ffffff'), dbeModel='model', dbeSamples=[0, 1]),
-#          DBElement(DataClassInstance('c6','#ffffff'), dbeModel='model', dbeSamples=[0, 1])]
-#
-##    myDBElementDictionary = dict(zip([x.dbeClass for x in xx], xx))
-#    dd = DataBase(xx)
-#    print dd
-#
-##    for k in myDBElementDictionary.iterkeys():
-##        assert dd[k] == myDBElementDictionary[k]
+
+    # myDBElementDictionary = dict(zip([x.name for x in myClasses], myDBEList))
+    # for k in myDBElementDictionary.iterkeys():
+    #     assert dd[k] == myDBElementDictionary[k]
 
 if __name__ == '__main__':
     _test()
