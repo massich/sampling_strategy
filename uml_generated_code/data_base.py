@@ -1,6 +1,7 @@
 """random thoughts - sampling_strategy, support code"""
 
 import collections
+import numpy as np
 # from data_class_instance import *
 # from i_data_model import *
 
@@ -70,39 +71,47 @@ class DataBase(dict):
         :version: 0.0.1
         :author: sik
         """
-        super(self.__class__, self).__init__(
-            zip([e.dbeClass.name() for e in dbelementList],
-            dbelementList))
+        try:
+            keyList = [e.dbeClass.name for e in dbelementList]
+        except TypeError:
+            eString = '{1}.__init__ TypeError, valid DBElement with \
+                       DataClassInstance as dbeClass element was expected. \
+                       Instead {2}, {3} types were given.'
+            print eString.format(self.__class__,
+                                 dbelementList[0].__class__,
+                                 dbelementList[0].dbeClass.__class__)
+
+        super(self.__class__, self).__init__(zip(keyList, dbelementList))
 
     def __str__(self):
         """
         formated console print of the DataBase object
 
-        .. todo:: [code][to Impl.] This is a copy-paste of the previous code\
-                                   structure
+        .. todo:: [code] maybe the element formating should be handeled by \
+                DBElement
+
         :version: 0.0.1
         :author: sik
         """
-        return self.__class__
-        # "{1}-class DataBase\n".format(len(self))
-        # elementInfo = "\t<{1}> class: {2}, {3}\n \
-        #                \t<{1}> model: {4}\n \
-        #                \t<{1}> shape: {5}\n\n"
-        # return "{1}-class DataBase\n{2}".format(len(self),
-        #     [elementInfo.format(dKey, dElement.dbeClass.get_name(),
-        #                         dElement.dbeClass.get_color(),
-        #                         dElement.dbeModel.get_model_information(),
-        #                         dElement.dbeSamples.shape())
-        #         for dKey, dElement in self.iteritems()])
-        
-#        modelsInfoString="\t{0}_({1})_________________________\n\t\tmodel:: {2}\n \t\tsamples:: {3}\n \t\trange:: {4}\n"
-#        modelsInfo=""
-#        for d in self._data:
-#            modelsInfo+=modelsInfoString.format(
-#            d._class._name,d._class._color,d._model.get_model_information(),d._numOfSamples,d.get_range())
-#
-#        return'Real-Data simulation ({0} Models):\n{1}'.format(
-#        len(self._data),modelsInfo)
+        # define the format strings for each DBElement attribute
+        classFStr = "class: '{0.dbeClass.name:s}', '{0.dbeClass.color:s}'\n"
+        modelFStr = "model: {0.dbeModel:s}\n"
+        shapeFStr = "shape: {0.dbeSamples:s}\n"
+
+        dbElementsReport = ""
+        for dKey, dElement in self.items():
+            dbElementsReport += "\n"
+
+            for fStr, dType in zip([classFStr, modelFStr, shapeFStr],
+                                   ['DataClassInstance', 'IDataModel',
+                                    'np.array']):
+                try:
+                    dbElementsReport += "\t<{0:s}> ".format(dKey)
+                    dbElementsReport += fStr.format(dElement)
+                except TypeError:
+                    print "un-expected dataType. ({} expected)".format(dType)
+
+        return "{0:d}-class DataBase{1:s}".format(len(self), dbElementsReport)
 
     def get_range(self):
         """
@@ -143,19 +152,29 @@ class DataBase(dict):
 def _test():
     """ test function to call when executing this file directly """
 
-    xx = [DBElement(DataClassInstance('c1','#ffffff'), dbeModel='model', dbeSamples=[0, 1]),
-          DBElement(DataClassInstance('c2','#ffffff'), dbeModel='model', dbeSamples=[0, 1]),
-          DBElement(DataClassInstance('c3','#ffffff'), dbeModel='model', dbeSamples=[0, 1]),
-          DBElement(DataClassInstance('c4','#ffffff'), dbeModel='model', dbeSamples=[0, 1]),
-          DBElement(DataClassInstance('c5','#ffffff'), dbeModel='model', dbeSamples=[0, 1]),
-          DBElement(DataClassInstance('c6','#ffffff'), dbeModel='model', dbeSamples=[0, 1])]
+    xx = [DataClassInstance('c{}'.format(i), '#fffff{}'.format(i))
+          for i in range(1, 4)]
+    print xx[0].__class__
 
-#    myDBElementDictionary = dict(zip([x.dbeClass for x in xx], xx))
-    dd = DataBase(xx)
+    yy = [DBElement(x, 'model{}'.format(indx+1), np.array([0, indx]))
+          for indx, x in enumerate(xx)]
+    print yy
+
+    dd = DataBase(yy)
     print dd
-
-#    for k in myDBElementDictionary.iterkeys():
-#        assert dd[k] == myDBElementDictionary[k]
+#    xx = [DBElement(DataClassInstance('c1','#ffffff'), dbeModel='model', dbeSamples=[0, 1]),
+#          DBElement(DataClassInstance('c2','#ffffff'), dbeModel='model', dbeSamples=[0, 1]),
+#          DBElement(DataClassInstance('c3','#ffffff'), dbeModel='model', dbeSamples=[0, 1]),
+#          DBElement(DataClassInstance('c4','#ffffff'), dbeModel='model', dbeSamples=[0, 1]),
+#          DBElement(DataClassInstance('c5','#ffffff'), dbeModel='model', dbeSamples=[0, 1]),
+#          DBElement(DataClassInstance('c6','#ffffff'), dbeModel='model', dbeSamples=[0, 1])]
+#
+##    myDBElementDictionary = dict(zip([x.dbeClass for x in xx], xx))
+#    dd = DataBase(xx)
+#    print dd
+#
+##    for k in myDBElementDictionary.iterkeys():
+##        assert dd[k] == myDBElementDictionary[k]
 
 if __name__ == '__main__':
     _test()
