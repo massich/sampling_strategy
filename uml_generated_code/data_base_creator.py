@@ -1,6 +1,11 @@
+"""random thoughts - sampling_strategy, DataBase creation support code.
+
+   This module generates DataBase objects for experimentation
+"""
+
 from data_base import *
-from multi_variated_gaussian_model import *             # DataSimulation
-import numpy as np                                      # DataSimulation
+from i_data_model import *             # needed for DataSimulation
+import numpy as np                     # needed for DataSimulation
 
 
 class DataBaseCreator(object):
@@ -71,7 +76,7 @@ class DataSimulation (DataBaseCreator):
             class. Defaults to 30.
 
         Return:
-            a **two**-class DataBase object of 2D data. Both classes follow 
+            a **two**-class DataBase object of 2D data. Both classes follow \
             multi-variate Gaussian distribution.
 
         :rtype: DataBase
@@ -92,7 +97,7 @@ class DataSimulation (DataBaseCreator):
 
         samples = [m.generate_data(numSamples) for m in models]
 
-        return DataBase([DBElement(dbeClass=c, dbeModel=m, dbeSamples=s) 
+        return DataBase([DBElement(dbeClass=c, dbeModel=m, dbeSamples=s)
                          for c, m, s in zip(classes, models, samples)])
 
 

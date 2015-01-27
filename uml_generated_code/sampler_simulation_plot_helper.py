@@ -1,13 +1,17 @@
-"""random thoughts - sampling_strategy, support code"""
+"""random thoughts - sampling_strategy, plotting support code"""
 
-#from multipledispatch import dispatch
+# from multipledispatch import dispatch
+from data_base import *
+from data_base_creator import *
+from i_data_model import *
 
 
-def my_plotter(ax, data1, data2, param_dict):
+def plot_realData_model_isolines_in_dbSpace(ax, model, param_dict):
     """ A helper function to make a graph
 
     Args:
       ax (axes): The axes to draw to
+      model (IDataModel): model to display as isolines
       data1 (array): The x data
       data2 (array): The y data
       param_dict (dict, optional): Dictionary of kwargs to pass to ax.plot
@@ -16,28 +20,28 @@ def my_plotter(ax, data1, data2, param_dict):
       list: list of artists added
 
     """
-    out = ax.plot(data1, data2, **param_dict)
-    return out
+    pass
 
-def foo(bar, baz=None):
-    """
-    This is a prose description of foo and all the great
-    things it does.
 
-    Parameters
-    ----------
-    bar : (type of bar)
-        A description of bar
+def _test():
+    """ test function to call when executing this file directly """
 
-    baz : (type of baz), optional
-        A description of baz
+#    d = DataSimulation()
+#    myDataBaseExample = d.generate_default2MVGM_testcase()
+#
+#    print myDataBaseExample
+    
+    import matplotlib.pyplot as plt
+     import numpy as np
+    # import matplotlib.mlab as mlab
+    N = 50
+    x = np.random.rand(N)
+    y = np.random.rand(N)
+    colors = np.random.rand(N)
+    area = np.pi * (15 * np.random.rand(N))**2 # 0 to 15 point radiuses
 
-    Returns
-    -------
-    foobar : (type of foobar)
-        A description of foobar
-    foobaz : (type of foobaz)
-        A description of foobaz
-    """
-    # some very clever code
-    return foobar, foobaz
+    plt.scatter(x, y, s=area, c=colors, alpha=0.5)
+    plt.show()
+
+if __name__ == '__main__':
+    _test()
