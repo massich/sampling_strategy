@@ -167,12 +167,11 @@ class MultiVariatedGaussianModel (IDataSimulationModel):
             self._sigmaXY = kwargs.pop('sigmaXY', args[4])
 
     def get_model_information(self):
-        """Returns the information of the multi-variate 2D Gaussian Model in as
-        a dictionary
+        """Returns the information of the multi-variate 2D Gaussian Model as a dictionary
 
         Returns:
-          dict: {'xMean':_muX, 'yMean':_muY,
-                 'xSTD':_sigmaX, 'ySTD':_sigmaY, 'xySTD':_sigmaXY,}
+            {'xMean':_muX, 'yMean':_muY, 'xSTD':_sigmaX, 'ySTD':_sigmaY, \
+            'xySTD':_sigmaXY,}
 
         :version: 0.0.1
         :author: sik
@@ -190,12 +189,6 @@ class MultiVariatedGaussianModel (IDataSimulationModel):
 
     def generate_data(self, numSamples):
         """TODO: import parent documentation, while changing version and author
-
-        Returns:
-          nparray:
-
-        :version: 0.0.1
-        :author: sik
         """
         return np.random.multivariate_normal(
             [self._muX, self._muY],

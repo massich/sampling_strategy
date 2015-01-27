@@ -23,6 +23,7 @@ def plot_realData_model_isolines_in_dbSpace(ax, model, param_dict={}):
     """
     return model.draw_2Disoc(ax, param_dict)
 
+
 def scatterPlot_realData_nparray_in_dbSpace(ax, data, param_dict=dict()):
     """ A helper function to make a graph
 
@@ -45,7 +46,6 @@ def _test():
     """ test function to call when executing this file directly """
 
     import matplotlib.pyplot as plt
-    import numpy as np
 
     d = DataSimulation()
     myDataBaseExample = d.generate_default2MVGM_testcase()
@@ -56,12 +56,12 @@ def _test():
     xx2 = myDataBaseExample['red'].dbeSamples
     mm2 = myDataBaseExample['red'].dbeModel
 
-    fig, ax  = plt.subplots()
-    scatterPlot_realData_nparray_in_dbSpace(ax, xx1, {'marker':'x'})
+    fig, ax = plt.subplots()
+    scatterPlot_realData_nparray_in_dbSpace(ax, xx1, {'marker': 'x'})
     scatterPlot_realData_nparray_in_dbSpace(ax, xx2)
 
     plot_realData_model_isolines_in_dbSpace(ax, mm1)
-    plot_realData_model_isolines_in_dbSpace(ax, mm2, {'colors':'g'})
+    plot_realData_model_isolines_in_dbSpace(ax, mm2, {'colors': 'g'})
 
     plt.show()
 
