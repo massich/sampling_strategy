@@ -88,7 +88,9 @@ class DataBase(dict):
         formated console print of the DataBase object
 
         .. todo:: [code] maybe the element formating should be handeled by \
-                DBElement
+                DBElement. \
+                see `stackOverflow <http://stackoverflow.com/questions/7914152/can-i-overwrite-the-string-form-of-a-namedtuple>`_ \
+                and `the docs <http://docs.python.org/library/collections.html#collections.namedtuple>`_
 
         :version: 0.0.1
         :author: sik
@@ -143,6 +145,27 @@ class DataBase(dict):
         """
 
         @param mplAxis axisId : 
+        @return  :
+        @author sik
+        """
+        pass
+
+
+class DataSet (DataBase):
+    """
+    .. todo:: [code] whole DataSet class
+
+    :version:
+    :author: sik
+    """
+
+    def draw_samples(self, axisId, fade=0.5):
+        """
+         draw_samples draws a scatter plot of the dataset data fading those \
+         DataBase samples not belonging to the DataSet
+
+        @param mplAxis axisId : 
+        @param float fade : fading ratio
         @return  :
         @author sik
         """
