@@ -41,17 +41,17 @@ class IDataModel(object):
         pass
 
     @abstractmethod
-    def draw_2Disoc(self, ax, dataClass=None):
+    def draw_2Disoc(self, ax, param_dict={}):
         """draw_2Disoc draws iso-value contours in order to illustrate the
         model distribution.
 
         Args:
             ax (axes): The axes to draw to
-            dataClass (DataClassInstance): The data class associated to the \
-                                           model
+            param_dict (dict, optional): Dictionary of kwargs to pass to \
+            ax.plot
 
         Returns:
-            A list of artists added to **ax**
+            A list of artists added to **ax** while plotting
 
         :rtype: list
         :version: 0.0.1
@@ -202,12 +202,12 @@ class MultiVariatedGaussianModel (IDataSimulationModel):
             [[self._sigmaX, self._sigmaXY], [self._sigmaXY, self._sigmaY]],
             numSamples)
 
-    def draw_2Disoc(self, axisId, dataClass=None):
-        # collect needed parameters: plot color, range, etc.
-        try:
-            modelColor = dataClass._color
-        except Exception:
-            modelColor = '#000000'
+    def draw_2Disoc(self, axisId, param_dict={}):
+        # Mixing the default parameters with param_dict. param_dict has
+        # priority
+        param_dictDefaults = {'colors': 'k',
+                              'linewidths': np.arange(.5, 2, .25)}
+        param_dictDefaults.update(param_dict)
 
         aLimits = axisId.axis()
         delta = (aLimits[1] - aLimits[0])/100
@@ -216,13 +216,9 @@ class MultiVariatedGaussianModel (IDataSimulationModel):
         Z = mlab.bivariate_normal(X, Y, self._sigmaX, self._sigmaY,
                                   self._muX, self._muY, self._sigmaXY)
 
-#        displayParameters = dict([('linewidths', np.arange(.5, 2, .25)),
-#                                  ('colors', modelColor)])
         axisId.contour(X, Y, Z/Z.max(),     # data
                        4,                   # 4 isolines
-                       linewidths=np.arange(.5, 2, .25),
-                       colors=modelColor)
-#                       displayParameters)   # plotting parameters
+                       **param_dictDefaults)
 
 
 def _test():
