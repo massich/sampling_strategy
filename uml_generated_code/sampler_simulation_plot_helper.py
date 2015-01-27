@@ -23,6 +23,24 @@ def plot_realData_model_isolines_in_dbSpace(ax, model, param_dict):
     pass
 
 
+def scatterPlot_realData_nparray_in_dbSpace(ax, data, param_dict):
+    """ A helper function to make a graph
+
+    Args:
+        ax (axes): The axes to draw to.
+        data (np.array): Data points in [[x1, y1], [x2, y2] .. [xn, yn]] form.
+        param_dict (dict, optional): Dictionary of kwargs to pass to ax.plot
+
+    Returns:
+        list of artists added
+
+    :rtype: list
+    :version: 0.0.1
+    :author: sik
+    """
+    return ax.scatter(data[:, 0], data[:, 1], **param_dict)
+
+
 def _test():
     """ test function to call when executing this file directly """
 
@@ -30,17 +48,17 @@ def _test():
 #    myDataBaseExample = d.generate_default2MVGM_testcase()
 #
 #    print myDataBaseExample
-    
-    import matplotlib.pyplot as plt
-     import numpy as np
-    # import matplotlib.mlab as mlab
-    N = 50
-    x = np.random.rand(N)
-    y = np.random.rand(N)
-    colors = np.random.rand(N)
-    area = np.pi * (15 * np.random.rand(N))**2 # 0 to 15 point radiuses
 
-    plt.scatter(x, y, s=area, c=colors, alpha=0.5)
+    import matplotlib.pyplot as plt
+    import numpy as np
+    # import matplotlib.mlab as mlab
+
+    d = DataSimulation()
+    myDataBaseExample = d.generate_default2MVGM_testcase()
+
+    xx = myDataBaseExample['blue'].dbeSamples
+    fig, (ax0, ax1) = plt.subplots(ncols=2)
+    scatterPlot_realData_nparray_in_dbSpace(ax0, xx)
     plt.show()
 
 if __name__ == '__main__':
