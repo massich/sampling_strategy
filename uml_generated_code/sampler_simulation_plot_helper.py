@@ -23,7 +23,7 @@ def plot_realData_model_isolines_in_dbSpace(ax, model, param_dict):
     pass
 
 
-def scatterPlot_realData_nparray_in_dbSpace(ax, data, param_dict):
+def scatterPlot_realData_nparray_in_dbSpace(ax, data, param_dict=None):
     """ A helper function to make a graph
 
     Args:
@@ -38,7 +38,7 @@ def scatterPlot_realData_nparray_in_dbSpace(ax, data, param_dict):
     :version: 0.0.1
     :author: sik
     """
-    return ax.scatter(data[:, 0], data[:, 1], **param_dict)
+    return ax.scatter(data[:, 0], data[:, 1])
 
 
 def _test():
@@ -55,10 +55,12 @@ def _test():
 
     d = DataSimulation()
     myDataBaseExample = d.generate_default2MVGM_testcase()
+    print myDataBaseExample
 
     xx = myDataBaseExample['blue'].dbeSamples
     fig, (ax0, ax1) = plt.subplots(ncols=2)
     scatterPlot_realData_nparray_in_dbSpace(ax0, xx)
+    scatterPlot_realData_nparray_in_dbSpace(ax1, xx)
     plt.show()
 
 if __name__ == '__main__':
