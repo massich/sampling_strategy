@@ -152,14 +152,40 @@ class PModelPCA(IProjectionModel):
     def project_data(self, data):
         return self._transformation.transform(data)
 
-    def display_base(self, axisId, param_dict={}):
-        base = np.array([[-1, 1, 0, 0], [0, 0, -1, 1]]).T
-        base_projected = self._transformation.transform(6*base)
+    def display_base(self, ax, param_dict={}):
+        base = np.array([[-1, 0], [1, 0], [0, -1], [0, 1]])
+        print base.shape
+        print self._transformation.components_.T
+        
+        base_ = self._transformation.transform(base)
+        print "base : {}".format(base)
+        print "proj.: {}".format(base_)
+        
+        xx = self._transformation.components_.T
+        #xx /= xx.std()
 
-        x, y = base_projected.T
-        axisId.plot(x[0:2], y[0:2], param_dict)
-        axisId.plot(x[2:4], y[2:4], param_dict)
+        x_xx, y_xx = xx
+        print x_xx
+        print y_xx
+        ax.plot(x_xx, y_xx, 'k')
 
+        ax.plot(base_[:2,  0], base_[:2,  1], param_dict)
+        ax.plot(base_[-2:, 0], base_[-2:, 1], param_dict)
+        ax.plot(base_[:2,  1], base_[:2,  0], 'g')
+        ax.plot(base_[-2:, 1], base_[-2:, 0], 'g')
+        # x, y = base_projected
+        # print x
+        # print y
+        # axisId.plot(x[0:2], y[0:2], param_dict)
+        # axisId.plot(x[2:4], y[2:4], param_dict)
+
+
+class PModelPCAsingleClass(PModelPCA):
+    """ Force to tray the PCA in a single class data """
+    def __init__(self, db, key, *argv, **kwargs):
+        numDims2Keep = 2
+        data2fit = db[key].dbeSamples
+        self._transformation = PCA(n_components=numDims2Keep).fit(data2fit)
 
 class PModelLDA(IProjectionModel):
     """Docstring for PModelLDA. """
@@ -187,16 +213,17 @@ def _test():
         for i in range(n):
             yield random.choice(types).__name__
 
-    myDb = DataSimulation().generate_default2MVGM_testcase()
+    myDb = DataSimulation().generate_default2MVGM_testcase(numSamples=1000,
+                                                           randomSeed=1405898)
 #    myDataBaseExample = d.generate_default2MVGM_testcase()
 
     myIdentityProj = ProjectionModelFactory.createIProjectionModel(
-                     'PModelPCA', myDb)
+                     'PModelPCAsingleClass', myDb, 'red')
     # print myDb
     fig, ax = plt.subplots()
     ax.axis([-3, 3, -3, 3])
     spl.plot_DataBase_in_dbSpace(ax, myDb)
-    myIdentityProj.display_base(ax, 'k')
+    myIdentityProj.display_base(ax, 'r')
     plt.show()
 
 if __name__ == '__main__':
