@@ -118,6 +118,94 @@ class Square(IProjectionModel):
         pass
 
 
+class PMIdentity(IProjectionModel):
+    """PMIdentity does no projection of the data, so that the projected space \
+       is exaclty the same as the original one.
+    """
+
+    def __init__(self, *argv, **kwargs):
+        pass
+
+    def display_base(sefl, ax, param_dict={}):
+        """ Display in **ax** the projection base in the original DataBase space.
+
+        Args:
+          ax (axes): The axes to draw to
+          param_dict (dict, optional): Dictionary of kwargs to pass to ax.plot
+
+        Returns: list of artists added to **ax**
+
+        :rtype: list
+        :version: 0.0.1
+        :author: sik
+        """
+        aLimit = ax.axis()
+        out1 = ax.plot(aLimit[:2], [0, 0], param_dict)
+        out2 = ax.plot([0, 0], aLimit[-2:], param_dict)
+        return out1, out2
+
+
+class PModelSingleFeat(IProjectionModel):
+    """PModelSingleFeat takes a single feature of the data
+    
+    TODO: right now only handles 2D data and everything is hardcoded
+    """
+
+    def __init__(self, featureIndx=0, *argv, **kwargs):
+        if featureIndx > 1:
+            raise 'featureIndx should be 0 or 1'
+        self._featureIndx = featureIndx
+
+    def display_base(self, axisId, lineW=2):
+        aLimit = axisId.axis()
+        if self._featureIndx == 0:
+            yCoord = ((aLimit[3]-aLimit[2]) / 2) + aLimit[2]
+            axisId.plot(aLimit[:1],
+                        [yCoord]*2,
+                        'k-', linewidth=lineW)
+        else:
+            xCoord = ((aLimit[3]-aLimit[2]) / 2) + aLimit[2]
+            axisId.plot([xCoord]*2,
+                        aLimit[:1],
+                        'k-', linewidth=lineW)
+
+    def project_data(self, dataPoints):
+        return dataPoints[:, self._featureIndx]
+
+
+class PModelPCA(object):
+    """Docstring for fiterPCL. """
+
+    def __init__(self, data, *argv, **kwargs):
+        """TODO: to be defined1. """
+        num_dims_to_keep = 2
+        self._transformation = PCA(n_components=num_dims_to_keep).fit(data)
+
+    def project_data(self, data):
+        return self._transformation.transform(data)
+
+    def display_base(self, axisId, lineW=2):
+        base = np.array([[-1, 1, 0, 0], [0, 0, -1, 1]]).T
+        base_projected = self._transformation.transform(6*base)
+
+        x, y = base_projected.T
+        axisId.plot(x[0:2], y[0:2], 'k-', linewidth=lineW)
+        axisId.plot(x[2:4], y[2:4], 'k-', linewidth=lineW)
+
+
+class PModelLDA(IProjectionModel):
+    """Docstring for PModelLDA. """
+
+    def __init__(self):
+        raise NotImplemented
+
+    def display_base(self, axisId):
+        raise NotImplemented
+
+    def project_data(self, dataPoints):
+        raise NotImplemented
+
+
 def shapeNameGen(n):
     # http://sahandsaba.com/python-iterators-generators.html
     # g = (random.random() < 0.4 for __ in itertools.count())
@@ -127,30 +215,22 @@ def shapeNameGen(n):
 
 
 def _test():
+#    from data_base import DataBase
+    from data_base_creator import DataSimulation
+    import sampler_simulation_plot_helper as spl
+    import matplotlib.pyplot as plt
 
-    assert issubclass(Circle, IProjectionModel)
-    assert issubclass(Square, IProjectionModel)
+    myDb = DataSimulation().generate_default2MVGM_testcase()
+#    myDataBaseExample = d.generate_default2MVGM_testcase()
 
-    # Create sublcass instances directly
-    for s in [Circle(), Square()]:
-        s.draw()
-        s.erase()
+    myIdentityProj = ProjectionModelFactory.createIProjectionModel('PMIdentity', myDb)
 
-    print "Start testing the factory"
-    shapeObjects = [
-        ProjectionModelFactory.createIProjectionModel(next(shapeNameGen(1)), 'purple'),
-        ProjectionModelFactory.createIProjectionModel(next(shapeNameGen(1)), color='green'),
-        ProjectionModelFactory.createIProjectionModel(next(shapeNameGen(1)), stupidParam='stupid')
-        ]
-
-    # shapeObjects = [ProjectionModelFactory.createIProjectionModel(sType)
-    #                 for sType in shapeNameGen(N)]
-
-    # print shapeObjects
-    for idx, s in enumerate(shapeObjects):
-        print "IProjectionModel ({0:d})_________".format(idx)
-        s.draw()
-        s.erase()
+    print myDb
+    fig, ax = plt.subplots()
+    ax.axis([-3, 3, -3, 3])
+    spl.plot_DataBase_in_dbSpace(ax, myDb)
+    myIdentityProj.display_base(ax,'k')
+    plt.show()
 
 if __name__ == '__main__':
     _test()
