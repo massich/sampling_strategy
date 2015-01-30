@@ -3,9 +3,9 @@
    This module projects DataBase objects into a different space where to \
    perform the sampling
 """
-import random
 from abc import ABCMeta, abstractmethod
-#raise NotImplementedError
+from sklearn.decomposition import PCA
+import numpy as np
 
 
 class ProjectionModelFactory(object):
@@ -24,7 +24,7 @@ class ProjectionModelFactory(object):
             validTypeNames = [s.__name__ 
                               for s in IProjectionModel.__subclasses__()]
             raise TypeError("""'{0}' is an invalid IProjectionModel subclass. \
-                            Valid type names are:\n\t{1:s}""".format(id,
+                            Valid type names are:\n\t{1:s}""".format(argv[0],
                             '\n\t'.join(validTypeNames)))
 
 
@@ -72,49 +72,31 @@ class IProjectionModel(object):
     # Here follow the methods required for an IProjectionModel implantation
     @abstractmethod
     def __init__(self, *argv, **kwargv):
-        pass
+        """ __init__ is the compulsory constructor method to be implemented \
+            by subclasses, since it is called from \
+            `ProjectionModelFactory._create()`. 
 
-    @abstractmethod
-    def display_base(self, ax):
-        """ This method draws the projection base into the **ax** axis handle
-
-            Args:
-                ax (mpl::axis): axis to plot on
-        
-            Returns:
-                A list containing all the artists added into **ax**
-
-        :version: 0.0.1
-        :author: sik
+            Note: 
+                If the projection model needs some fitting, here is where \
+                it should take place.
         """
         pass
 
-class Circle(IProjectionModel):
-    def __init__(self, color='blue', *argv, **kwargv):
-        print "{0:<27s} {1}".format("Circle::__init__::", locals())
-        self._color = color
+    @abstractmethod
+    def display_base(self, ax, param_dict={}):
+        """ Display, into the **ax** handle, the projection model base in the
+            original DataBase space reference frame.
 
-    def draw(self):
-        print("Circle.draw, in color {}".format(self._color))
+            Args:
+              ax (mpl:axis): The axis to plot on
+              param_dict (dict, optional): Dictionary of kwargs to pass to ax.plot
 
-    def erase(self):
-        print("Circle.erase")
+            Returns: list of artists added to **ax**
 
-    def display_base(self, ax):
-        pass
-
-class Square(IProjectionModel):
-    def __init__(self, color='red', *argv, **kwargv):
-        print "{0:<27s} {1}".format("Square::__init__::", locals())
-        self._color = color
-
-    def draw(self):
-        print("Square.draw, in color {}".format(self._color))
-
-    def erase(self):
-        print("Square.erase")
-
-    def display_base(self, ax):
+        :rtype: list
+        :version: 0.0.1
+        :author: sik
+        """
         pass
 
 
@@ -127,18 +109,6 @@ class PMIdentity(IProjectionModel):
         pass
 
     def display_base(sefl, ax, param_dict={}):
-        """ Display in **ax** the projection base in the original DataBase space.
-
-        Args:
-          ax (axes): The axes to draw to
-          param_dict (dict, optional): Dictionary of kwargs to pass to ax.plot
-
-        Returns: list of artists added to **ax**
-
-        :rtype: list
-        :version: 0.0.1
-        :author: sik
-        """
         aLimit = ax.axis()
         out1 = ax.plot(aLimit[:2], [0, 0], param_dict)
         out2 = ax.plot([0, 0], aLimit[-2:], param_dict)
@@ -147,7 +117,7 @@ class PMIdentity(IProjectionModel):
 
 class PModelSingleFeat(IProjectionModel):
     """PModelSingleFeat takes a single feature of the data
-    
+
     TODO: right now only handles 2D data and everything is hardcoded
     """
 
@@ -156,41 +126,39 @@ class PModelSingleFeat(IProjectionModel):
             raise 'featureIndx should be 0 or 1'
         self._featureIndx = featureIndx
 
-    def display_base(self, axisId, lineW=2):
-        aLimit = axisId.axis()
+    def display_base(self, ax, param_dict={}):
+        aLimit = ax.axis()
+        get_half = lambda minv, maxv: ((maxv-minv)/2)+minv
+
         if self._featureIndx == 0:
-            yCoord = ((aLimit[3]-aLimit[2]) / 2) + aLimit[2]
-            axisId.plot(aLimit[:1],
-                        [yCoord]*2,
-                        'k-', linewidth=lineW)
+            yCenter = get_half(aLimit[2], aLimit[3])
+            return ax.plot(aLimit[:2], [yCenter]*2, param_dict)
         else:
-            xCoord = ((aLimit[3]-aLimit[2]) / 2) + aLimit[2]
-            axisId.plot([xCoord]*2,
-                        aLimit[:1],
-                        'k-', linewidth=lineW)
+            xCenter = get_half(aLimit[0], aLimit[1])
+            return ax.plot([xCenter]*2, aLimit[-2:], param_dict)
 
     def project_data(self, dataPoints):
         return dataPoints[:, self._featureIndx]
 
 
-class PModelPCA(object):
-    """Docstring for fiterPCL. """
+class PModelPCA(IProjectionModel):
+    """ Use Principal Component Analysis (PCA) as projection model."""
 
-    def __init__(self, data, *argv, **kwargs):
-        """TODO: to be defined1. """
-        num_dims_to_keep = 2
-        self._transformation = PCA(n_components=num_dims_to_keep).fit(data)
+    def __init__(self, db, *argv, **kwargs):
+        numDims2Keep = 2
+        data2fit = np.vstack([d.dbeSamples for d in db.itervalues()])
+        self._transformation = PCA(n_components=numDims2Keep).fit(data2fit)
 
     def project_data(self, data):
         return self._transformation.transform(data)
 
-    def display_base(self, axisId, lineW=2):
+    def display_base(self, axisId, param_dict={}):
         base = np.array([[-1, 1, 0, 0], [0, 0, -1, 1]]).T
         base_projected = self._transformation.transform(6*base)
 
         x, y = base_projected.T
-        axisId.plot(x[0:2], y[0:2], 'k-', linewidth=lineW)
-        axisId.plot(x[2:4], y[2:4], 'k-', linewidth=lineW)
+        axisId.plot(x[0:2], y[0:2], param_dict)
+        axisId.plot(x[2:4], y[2:4], param_dict)
 
 
 class PModelLDA(IProjectionModel):
@@ -206,30 +174,29 @@ class PModelLDA(IProjectionModel):
         raise NotImplemented
 
 
-def shapeNameGen(n):
-    # http://sahandsaba.com/python-iterators-generators.html
-    # g = (random.random() < 0.4 for __ in itertools.count())
-    types = IProjectionModel.__subclasses__()
-    for i in range(n):
-        yield random.choice(types).__name__
-
-
 def _test():
-#    from data_base import DataBase
+    import random
     from data_base_creator import DataSimulation
     import sampler_simulation_plot_helper as spl
     import matplotlib.pyplot as plt
 
+    def shapeNameGen(n):
+        # http://sahandsaba.com/python-iterators-generators.html
+        # g = (random.random() < 0.4 for __ in itertools.count())
+        types = IProjectionModel.__subclasses__()
+        for i in range(n):
+            yield random.choice(types).__name__
+
     myDb = DataSimulation().generate_default2MVGM_testcase()
 #    myDataBaseExample = d.generate_default2MVGM_testcase()
 
-    myIdentityProj = ProjectionModelFactory.createIProjectionModel('PMIdentity', myDb)
-
-    print myDb
+    myIdentityProj = ProjectionModelFactory.createIProjectionModel(
+                     'PModelPCA', myDb)
+    # print myDb
     fig, ax = plt.subplots()
     ax.axis([-3, 3, -3, 3])
     spl.plot_DataBase_in_dbSpace(ax, myDb)
-    myIdentityProj.display_base(ax,'k')
+    myIdentityProj.display_base(ax, 'k')
     plt.show()
 
 if __name__ == '__main__':
