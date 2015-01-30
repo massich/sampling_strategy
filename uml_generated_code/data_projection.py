@@ -102,6 +102,23 @@ class IProjectionModel(object):
         """
         pass
 
+    @abstractmethod
+    def project_data(self, data):
+        """ Returns the data in the new projected space
+        
+            Args:
+                data (np.array, shape(nSamp, nFeat)): data points to be \
+                transformed (aka, testing data). Where, nSamp is the number \
+                of samples and nFeat the number of features.
+
+            Returns:
+                An np.array containing the projection result in the form \
+                `shape(nSamp, nFeat_)` where, nSamp is the number of samples \
+                which is the same as in data, and nFeat_ is the new number \
+                of features.
+        """
+        pass
+
 
 class PMIdentity(IProjectionModel):
     """PMIdentity does no projection of the data, so that the projected space \
@@ -116,6 +133,9 @@ class PMIdentity(IProjectionModel):
         out1 = ax.plot(aLimit[:2], [0, 0], *argv, **kwargs)
         out2 = ax.plot([0, 0], aLimit[-2:], *argv, **kwargs)
         return out1, out2
+
+    def project_data(self, data):
+        return data
 
 
 class PModelSingleFeat(IProjectionModel):
