@@ -17,8 +17,7 @@ def plot_realData_model_isolines_in_dbSpace(ax, model, param_dict={}):
       model (IDataModel): model to display as isolines
       param_dict (dict, optional): Dictionary of kwargs to pass to ax.plot
 
-    Returns:
-      list: list of artists added
+    Returns: list of artists added
 
     :rtype: list
     :version: 0.0.1
@@ -90,7 +89,6 @@ def plot_DataBase_in_dbSpace(ax, data, param_dict={}):
     :author: sik
     """
     for d in data.itervalues():
-        print d
         plot_DBElement_in_dbSpace(ax, d, **param_dict)
 
 

@@ -12,12 +12,12 @@ class ProjectionModelFactory(object):
     """IProjectionModel Factory"""
 
     @staticmethod
-    def createIProjectionModel(*argv, **kwargv):
+    def createIProjectionModel(*argv, **kwargs):
         # First parameter is supposed to be the class name to instanciate
         try:
             if issubclass(eval(argv[0]), IProjectionModel):
                 # return the subclass factoryMethod
-                return eval(argv[0])._create(*argv[1:], **kwargv)
+                return eval(argv[0])._create(*argv[1:], **kwargs)
             else:
                 raise TypeError
         except (TypeError, NameError):
@@ -45,7 +45,7 @@ class IProjectionModel(object):
     __metaclass__ = ABCMeta
 
     @classmethod
-    def _create(cls, *argv, **kwargv):
+    def _create(cls, *argv, **kwargs):
         """_create is method called from `ProjectionModelFactory` to trigger \
            the desired projection model creation.
 
@@ -54,7 +54,7 @@ class IProjectionModel(object):
                     It must be a subclass of IProjectionModel.
                 *argv (tuple, optional): unnamed arguments to supply to the \
                                          instance creator.
-                **kwargv (dict, optional): named arguments to supply to the \
+                **kwargs (dict, optional): named arguments to supply to the \
                                            instance creator.
             Returns:
                    An initialized object of class **cls**
@@ -66,30 +66,33 @@ class IProjectionModel(object):
                       the doc string
         """
         myObj = object.__new__(cls)
-        myObj.__init__(*argv, **kwargv)
+        myObj.__init__(*argv, **kwargs)
         return myObj
 
     # Here follow the methods required for an IProjectionModel implantation
     @abstractmethod
-    def __init__(self, *argv, **kwargv):
+    def __init__(self, *argv, **kwargs):
         """ __init__ is the compulsory constructor method to be implemented \
             by subclasses, since it is called from \
-            `ProjectionModelFactory._create()`. 
+            `ProjectionModelFactory._create()`.
 
-            Note: 
+            Note:
                 If the projection model needs some fitting, here is where \
                 it should take place.
         """
         pass
 
     @abstractmethod
-    def display_base(self, ax, param_dict={}):
+    def display_base(self, ax, *argv, **kwargs):
         """ Display, into the **ax** handle, the projection model base in the
             original DataBase space reference frame.
 
             Args:
               ax (mpl:axis): The axis to plot on
-              param_dict (dict, optional): Dictionary of kwargs to pass to ax.plot
+              *argv (optional): tuple of unnamed argument values to pass \
+                to `ax.plot`
+              **kwargs (optional): Dictionary of keyword-arguments and values \
+                to pass to `ax.plot`
 
             Returns: list of artists added to **ax**
 
@@ -108,10 +111,10 @@ class PMIdentity(IProjectionModel):
     def __init__(self, *argv, **kwargs):
         pass
 
-    def display_base(sefl, ax, param_dict={}):
+    def display_base(sefl, ax, *argv, **kwargs):
         aLimit = ax.axis()
-        out1 = ax.plot(aLimit[:2], [0, 0], param_dict)
-        out2 = ax.plot([0, 0], aLimit[-2:], param_dict)
+        out1 = ax.plot(aLimit[:2], [0, 0], *argv, **kwargs)
+        out2 = ax.plot([0, 0], aLimit[-2:], *argv, **kwargs)
         return out1, out2
 
 
@@ -126,16 +129,16 @@ class PModelSingleFeat(IProjectionModel):
             raise 'featureIndx should be 0 or 1'
         self._featureIndx = featureIndx
 
-    def display_base(self, ax, param_dict={}):
+    def display_base(self, ax, *argv, **kwargs):
         aLimit = ax.axis()
         get_half = lambda minv, maxv: ((maxv-minv)/2)+minv
 
         if self._featureIndx == 0:
             yCenter = get_half(aLimit[2], aLimit[3])
-            return ax.plot(aLimit[:2], [yCenter]*2, param_dict)
+            return ax.plot(aLimit[:2], [yCenter]*2, *argv, **kwargs)
         else:
             xCenter = get_half(aLimit[0], aLimit[1])
-            return ax.plot([xCenter]*2, aLimit[-2:], param_dict)
+            return ax.plot([xCenter]*2, aLimit[-2:], *argv, **kwargs)
 
     def project_data(self, dataPoints):
         return dataPoints[:, self._featureIndx]
@@ -152,32 +155,13 @@ class PModelPCA(IProjectionModel):
     def project_data(self, data):
         return self._transformation.transform(data)
 
-    def display_base(self, ax, param_dict={}):
+    def display_base(self, ax, *argv, **kwargs):  # param_dict={}):
+        """.. todo:: [code] merge both plot outputs """
         base = np.array([[-1, 0], [1, 0], [0, -1], [0, 1]])
-        print base.shape
-        print self._transformation.components_.T
-        
-        base_ = self._transformation.transform(base)
-        print "base : {}".format(base)
-        print "proj.: {}".format(base_)
-        
-        xx = self._transformation.components_.T
-        #xx /= xx.std()
-
-        x_xx, y_xx = xx
-        print x_xx
-        print y_xx
-        ax.plot(x_xx, y_xx, 'k')
-
-        ax.plot(base_[:2,  0], base_[:2,  1], param_dict)
-        ax.plot(base_[-2:, 0], base_[-2:, 1], param_dict)
-        ax.plot(base_[:2,  1], base_[:2,  0], 'g')
-        ax.plot(base_[-2:, 1], base_[-2:, 0], 'g')
-        # x, y = base_projected
-        # print x
-        # print y
-        # axisId.plot(x[0:2], y[0:2], param_dict)
-        # axisId.plot(x[2:4], y[2:4], param_dict)
+        base_ = self._transformation.transform(6*base)
+        out1 = ax.plot(base_[:2,  1], base_[:2,  0], *argv, **kwargs)
+        out2 = ax.plot(base_[-2:, 1], base_[-2:, 0], *argv, **kwargs)
+        return out1, out2
 
 
 class PModelPCAsingleClass(PModelPCA):
@@ -187,9 +171,9 @@ class PModelPCAsingleClass(PModelPCA):
         data2fit = db[key].dbeSamples
         self._transformation = PCA(n_components=numDims2Keep).fit(data2fit)
 
-class PModelLDA(IProjectionModel):
-    """Docstring for PModelLDA. """
 
+class PModelLDA(IProjectionModel):
+    """ Use Linear Discriminant Analysis (LDA) as projection model."""
     def __init__(self):
         raise NotImplemented
 
@@ -217,13 +201,16 @@ def _test():
                                                            randomSeed=1405898)
 #    myDataBaseExample = d.generate_default2MVGM_testcase()
 
-    myIdentityProj = ProjectionModelFactory.createIProjectionModel(
-                     'PModelPCAsingleClass', myDb, 'red')
+    myProjections = [ProjectionModelFactory.createIProjectionModel('PModelPCAsingleClass', myDb, 'red'),
+                     ProjectionModelFactory.createIProjectionModel('PModelPCAsingleClass', myDb, 'blue'),
+                     ProjectionModelFactory.createIProjectionModel('PModelPCA', myDb)]
+ 
     # print myDb
     fig, ax = plt.subplots()
     ax.axis([-3, 3, -3, 3])
     spl.plot_DataBase_in_dbSpace(ax, myDb)
-    myIdentityProj.display_base(ax, 'r')
+    for proj, color in zip(myProjections,['r', 'b', 'k']):
+        proj.display_base(ax,color,linewidth=2)
     plt.show()
 
 if __name__ == '__main__':
