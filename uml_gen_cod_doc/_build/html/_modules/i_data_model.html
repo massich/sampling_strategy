@@ -1,0 +1,156 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>i_data_model &mdash; sampling strategy 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="sampling strategy 0.0.1 documentation" href="../index.html" />
+    <link rel="up" title="Module code" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">sampling strategy 0.0.1 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for i_data_model</h1><div class="highlight"><pre>
+<span class="sd">&quot;&quot;&quot;random thoughts - sampling_strategy, support code&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">ABCMeta</span><span class="p">,</span> <span class="n">abstractmethod</span>
+<span class="c"># from data_base_creator import *</span>
+<span class="c"># from mplAxis import *</span>
+
+
+<div class="viewcode-block" id="IDataModel"><a class="viewcode-back" href="../api/i_data_model.html#i_data_model.IDataModel">[docs]</a><span class="k">class</span> <span class="nc">IDataModel</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;IDataModel is an abstract class to force equal signature between</span>
+<span class="sd">    generative and fitted data models present in DataBase class</span>
+
+<span class="sd">    :version: 0.0.1</span>
+<span class="sd">    :author: sik</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c"># information about abstract classes</span>
+    <span class="c">#  http://tinyurl.com/l3awj4d</span>
+    <span class="c">#  http://tinyurl.com/k8acb9x</span>
+    <span class="n">__metaclass__</span> <span class="o">=</span> <span class="n">ABCMeta</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; IDataModel.__init__ </span>
+<span class="sd">        TODO: should be an abstractmethod to force implementation? or should I</span>
+<span class="sd">        remove the whole thing?</span>
+
+<span class="sd">        :version: 0.0.1</span>
+<span class="sd">        :author: sik</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c"># information in pytonic constructors:</span>
+        <span class="c">#  http://tinyurl.com/3758j8u</span>
+        <span class="c">#  http://tinyurl.com/424tbt7</span>
+        <span class="c">#  http://tinyurl.com/lrownat</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@abstractmethod</span>
+<div class="viewcode-block" id="IDataModel.draw_2Disoc"><a class="viewcode-back" href="../api/i_data_model.html#i_data_model.IDataModel.draw_2Disoc">[docs]</a>    <span class="k">def</span> <span class="nf">draw_2Disoc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ax</span><span class="p">,</span> <span class="n">dataClass</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;draw_2Disoc draws iso-value contours in order to illustrate the</span>
+<span class="sd">        model distribution.</span>
+
+<span class="sd">        Note:</span>
+<span class="sd">          I&#39;m not sure if this function should belong to:</span>
+<span class="sd">          * the object, since the model knows all the information about itself</span>
+<span class="sd">          * :mod:`sampler_simulation_plot_helper`, since is the collection of</span>
+<span class="sd">            plotting functions</span>
+
+<span class="sd">        pre: The axis limits should be appropiated to carry the ploting</span>
+<span class="sd">        post: the distribution iso-value contours are displayed in axisId</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">          ax (axes): The axes to draw to</span>
+<span class="sd">          dataClass (DataClassInstance): The data class associated to the model</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">          list: list of artists added</span>
+
+<span class="sd">        :version: 0.0.1</span>
+<span class="sd">        :author: sik</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">sampling strategy 0.0.1 documentation</a> &raquo;</li>
+          <li><a href="index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2015, sik.
+      Last updated on Jan 23, 2015.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>

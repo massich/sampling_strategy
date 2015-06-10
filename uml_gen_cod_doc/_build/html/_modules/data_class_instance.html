@@ -1,0 +1,173 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>data_class_instance &mdash; sampling strategy 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="sampling strategy 0.0.1 documentation" href="../index.html" />
+    <link rel="up" title="Module code" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">sampling strategy 0.0.1 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for data_class_instance</h1><div class="highlight"><pre>
+<span class="sd">&quot;&quot;&quot;random thoughts - sampling_strategy, support code&quot;&quot;&quot;</span>
+
+
+<div class="viewcode-block" id="DataClassInstance"><a class="viewcode-back" href="../index.html#data_class_instance.DataClassInstance">[docs]</a><span class="k">class</span> <span class="nc">DataClassInstance</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;DataClassInstance stores relevant info to identify the data&#39;s class.</span>
+
+<span class="sd">    This information describing the data in hand is further used in plots or to</span>
+<span class="sd">    retrieve the data based on the data class attributes.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        _name (str): Human readable string to identify the data in hand.</span>
+<span class="sd">        _color (str): color code to identify the data when plotting. The color</span>
+<span class="sd">            should be specified in hexacode as &#39;#00ff00&#39;.</span>
+
+<span class="sd">    :Date: 2015-01-15</span>
+<span class="sd">    :version: 0.0.1</span>
+<span class="sd">    :author: sik</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">&#39;no_name&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">&#39;#555555&#39;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; __init__ initializes the object storing name and color.</span>
+
+<span class="sd">        Note:</span>
+<span class="sd">            Despite having default attributes, no DataClassInstance should be</span>
+<span class="sd">            initialized this manner since then data classes would be difficult</span>
+<span class="sd">            to differentiate</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            name (str, optional): Human readable data identifier. Defaults to</span>
+<span class="sd">                no_name.</span>
+<span class="sd">            color (str, optional): data color identifier. Defaults to #555555</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_color</span> <span class="o">=</span> <span class="n">color</span>
+
+<div class="viewcode-block" id="DataClassInstance.get_name"><a class="viewcode-back" href="../index.html#data_class_instance.DataClassInstance.get_name">[docs]</a>    <span class="k">def</span> <span class="nf">get_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;name retrieve function&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_name</span>
+</div>
+<div class="viewcode-block" id="DataClassInstance.set_name"><a class="viewcode-back" href="../index.html#data_class_instance.DataClassInstance.set_name">[docs]</a>    <span class="k">def</span> <span class="nf">set_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;name setter function&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="n">value</span>
+</div>
+<div class="viewcode-block" id="DataClassInstance.get_color"><a class="viewcode-back" href="../index.html#data_class_instance.DataClassInstance.get_color">[docs]</a>    <span class="k">def</span> <span class="nf">get_color</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;color retrieve function&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_color</span>
+</div>
+<div class="viewcode-block" id="DataClassInstance.set_color"><a class="viewcode-back" href="../index.html#data_class_instance.DataClassInstance.set_color">[docs]</a>    <span class="k">def</span> <span class="nf">set_color</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;color setter function&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_color</span> <span class="o">=</span> <span class="n">value</span>
+</div>
+    <span class="n">__nameProperty</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">get_name</span><span class="p">,</span> <span class="n">set_name</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span>
+                              <span class="p">[</span><span class="s">&#39;name is the data class name to appear plot&#39;</span>
+                               <span class="s">&#39;legends, etc...&#39;</span><span class="p">])</span>
+
+    <span class="n">__colorProperty</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">get_color</span><span class="p">,</span> <span class="n">set_color</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span>
+                               <span class="p">[</span><span class="s">&#39;color is the data class attribute used to&#39;</span>
+                                <span class="s">&#39;represent the class in plots, etc...&#39;</span><span class="p">])</span>
+
+</div>
+<span class="k">def</span> <span class="nf">_test</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot; test function to call when executing this file directly &quot;&quot;&quot;</span>
+
+    <span class="n">my_dclass</span> <span class="o">=</span> <span class="n">DataClassInstance</span><span class="p">()</span>
+    <span class="k">print</span> <span class="n">my_dclass</span><span class="o">.</span><span class="n">get_name</span><span class="p">()</span>
+    <span class="k">print</span> <span class="n">my_dclass</span><span class="o">.</span><span class="n">get_color</span><span class="p">()</span>
+
+    <span class="n">my_dclass</span><span class="o">.</span><span class="n">set_name</span><span class="p">(</span><span class="s">&#39;test_name&#39;</span><span class="p">)</span>
+    <span class="n">my_dclass</span><span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="s">&#39;#caca00&#39;</span><span class="p">)</span>
+    <span class="k">print</span> <span class="n">my_dclass</span><span class="o">.</span><span class="n">get_name</span><span class="p">()</span>
+    <span class="k">print</span> <span class="n">my_dclass</span><span class="o">.</span><span class="n">get_color</span><span class="p">()</span>
+
+    <span class="n">my_dclass</span> <span class="o">=</span> <span class="n">DataClassInstance</span><span class="p">(</span><span class="s">&#39;red&#39;</span><span class="p">,</span> <span class="s">&#39;#ff0000&#39;</span><span class="p">)</span>
+    <span class="k">print</span> <span class="n">my_dclass</span><span class="o">.</span><span class="n">get_name</span><span class="p">()</span>
+    <span class="k">print</span> <span class="n">my_dclass</span><span class="o">.</span><span class="n">get_color</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">_test</span><span class="p">()</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">sampling strategy 0.0.1 documentation</a> &raquo;</li>
+          <li><a href="index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2015, sik.
+      Last updated on Jan 23, 2015.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,242 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>multi_variated_gaussian_model &mdash; sampling strategy 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="sampling strategy 0.0.1 documentation" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">sampling strategy 0.0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-multi_variated_gaussian_model">
+<span id="multi-variated-gaussian-model"></span><h1>multi_variated_gaussian_model<a class="headerlink" href="#module-multi_variated_gaussian_model" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="multi_variated_gaussian_model.MultiVariatedGaussianModel">
+<em class="property">class </em><tt class="descclassname">multi_variated_gaussian_model.</tt><tt class="descname">MultiVariatedGaussianModel</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/multi_variated_gaussian_model.html#MultiVariatedGaussianModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#multi_variated_gaussian_model.MultiVariatedGaussianModel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">i_data_simulation_model.IDataSimulationModel</span></tt></p>
+<p>MultiVariatedGaussianModel implements an IDataSimulationModel as a multi-variate gaussian in order to simulate DataBase samples that behaves as such.</p>
+<dl class="attribute">
+<dt id="multi_variated_gaussian_model.MultiVariatedGaussianModel._muX">
+<tt class="descname">_muX</tt><a class="headerlink" href="#multi_variated_gaussian_model.MultiVariatedGaussianModel._muX" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em></p>
+<p>x mean value.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="multi_variated_gaussian_model.MultiVariatedGaussianModel._muY">
+<tt class="descname">_muY</tt><a class="headerlink" href="#multi_variated_gaussian_model.MultiVariatedGaussianModel._muY" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em></p>
+<p>y mean value.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="multi_variated_gaussian_model.MultiVariatedGaussianModel._sigmaX">
+<tt class="descname">_sigmaX</tt><a class="headerlink" href="#multi_variated_gaussian_model.MultiVariatedGaussianModel._sigmaX" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em></p>
+<p>variance along x.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="multi_variated_gaussian_model.MultiVariatedGaussianModel._sigmaY">
+<tt class="descname">_sigmaY</tt><a class="headerlink" href="#multi_variated_gaussian_model.MultiVariatedGaussianModel._sigmaY" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em></p>
+<p>variance along y.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="multi_variated_gaussian_model.MultiVariatedGaussianModel._sigmaXY">
+<tt class="descname">_sigmaXY</tt><a class="headerlink" href="#multi_variated_gaussian_model.MultiVariatedGaussianModel._sigmaXY" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em></p>
+<p>x,y covariance.</p>
+</dd></dl>
+
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Version:</th><td class="field-body"></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Author:</th><td class="field-body">sik</td>
+</tr>
+</tbody>
+</table>
+<p>The following parameters can be specified in order to define define
+a multivariate 2D Gaussian model. Otherwise, defaults my apply. Any
+other argument would create an exception.</p>
+<dl class="attribute">
+<dt id="multi_variated_gaussian_model.MultiVariatedGaussianModel.muX">
+<tt class="descname">muX</tt><a class="headerlink" href="#multi_variated_gaussian_model.MultiVariatedGaussianModel.muX" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float, optional</em></p>
+<p>x mean value. Defaults to 0</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="multi_variated_gaussian_model.MultiVariatedGaussianModel.muY">
+<tt class="descname">muY</tt><a class="headerlink" href="#multi_variated_gaussian_model.MultiVariatedGaussianModel.muY" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float, optional</em></p>
+<p>y mean value. Defaults to 0</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="multi_variated_gaussian_model.MultiVariatedGaussianModel.sigmaX">
+<tt class="descname">sigmaX</tt><a class="headerlink" href="#multi_variated_gaussian_model.MultiVariatedGaussianModel.sigmaX" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float, optional</em></p>
+<p>variance along x. Defaults to 1</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="multi_variated_gaussian_model.MultiVariatedGaussianModel.sigmaY">
+<tt class="descname">sigmaY</tt><a class="headerlink" href="#multi_variated_gaussian_model.MultiVariatedGaussianModel.sigmaY" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float, optional</em></p>
+<p>variance along y. Defaults to 1</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="multi_variated_gaussian_model.MultiVariatedGaussianModel.sigmaXY">
+<tt class="descname">sigmaXY</tt><a class="headerlink" href="#multi_variated_gaussian_model.MultiVariatedGaussianModel.sigmaXY" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float, optional</em></p>
+<p>x,y covariance. Defaults to 0.</p>
+</dd></dl>
+
+<p class="rubric">Example</p>
+<dl class="docutils">
+<dt>MultiVariatedGaussianModel(muX=0, muY=0,</dt>
+<dd>sigmaX=1, sigmaY=1, sigmaXY=0)</dd>
+</dl>
+<p>TODO: this example should be done properly (create model, get samples,
+check that samples follow the expected)</p>
+<dl class="method">
+<dt id="multi_variated_gaussian_model.MultiVariatedGaussianModel.draw_2Disoc">
+<tt class="descname">draw_2Disoc</tt><big>(</big><em>axisId</em>, <em>dataClass=None</em><big>)</big><a class="reference internal" href="../_modules/multi_variated_gaussian_model.html#MultiVariatedGaussianModel.draw_2Disoc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#multi_variated_gaussian_model.MultiVariatedGaussianModel.draw_2Disoc" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="multi_variated_gaussian_model.MultiVariatedGaussianModel.generate_data">
+<tt class="descname">generate_data</tt><big>(</big><em>numSamples</em><big>)</big><a class="reference internal" href="../_modules/multi_variated_gaussian_model.html#MultiVariatedGaussianModel.generate_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#multi_variated_gaussian_model.MultiVariatedGaussianModel.generate_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>TODO: import parent documentation, while changing version and author</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">nparray</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Version:</th><td class="field-body">0.0.1</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Author:</th><td class="field-body">sik</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="multi_variated_gaussian_model.MultiVariatedGaussianModel.get_model_information">
+<tt class="descname">get_model_information</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/multi_variated_gaussian_model.html#MultiVariatedGaussianModel.get_model_information"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#multi_variated_gaussian_model.MultiVariatedGaussianModel.get_model_information" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the information of the multi-variate 2D Gaussian Model in as
+a dictionary</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">{&#8216;xMean&#8217;:_muX, &#8216;yMean&#8217;:_muY,
+&#8216;xSTD&#8217;:_sigmaX, &#8216;ySTD&#8217;:_sigmaY, &#8216;xySTD&#8217;:_sigmaXY,}</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">dict</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Version:</th><td class="field-body">0.0.1</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Author:</th><td class="field-body">sik</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/api/multi_variated_gaussian_model.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">sampling strategy 0.0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2015, sik.
+      Last updated on Jan 23, 2015.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>

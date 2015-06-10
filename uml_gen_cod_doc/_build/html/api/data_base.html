@@ -1,0 +1,175 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>data_base &mdash; sampling strategy 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="sampling strategy 0.0.1 documentation" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">sampling strategy 0.0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-data_base">
+<span id="data-base"></span><h1>data_base<a class="headerlink" href="#module-data_base" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="data_base.DBElement">
+<em class="property">class </em><tt class="descclassname">data_base.</tt><tt class="descname">DBElement</tt><a class="headerlink" href="#data_base.DBElement" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defininition of (class, model, samples) triplet as a nametuple</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">In ordrder to see the expansion of the class code execute it with the
+<cite>verbose=True</cite> parameter.</p>
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="data_base.DataBase">
+<em class="property">class </em><tt class="descclassname">data_base.</tt><tt class="descname">DataBase</tt><big>(</big><em>dbelementList</em><big>)</big><a class="reference internal" href="../_modules/data_base.html#DataBase"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#data_base.DataBase" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">dict</span></tt></p>
+<p>DataBase is a (class, model, samples) triplet diccionary that can be
+accessed using the class name of the data.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<ul class="last simple">
+<li>the names of the data class <strong>must</strong> be unique, since they are used the dictionary key.</li>
+</ul>
+</div>
+<dl class="attribute">
+<dt id="data_base.DataBase.self">
+<tt class="descname">self</tt><a class="headerlink" href="#data_base.DataBase.self" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>dictionary of DBElement</em></p>
+<p>each element corresponds to a different
+group of data within the data base.</p>
+</dd></dl>
+
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Version:</th><td class="field-body">0.0.1</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Author:</th><td class="field-body">sik</td>
+</tr>
+</tbody>
+</table>
+<p>__init__ constructs a DataBase from the given parameters.(not fully
+implemnted, yet. Rightnow only accepted parameter is a DBElement list
+to be passed to the dict default __init__)</p>
+<dl class="docutils">
+<dt>TODO:</dt>
+<dd>this method should be overloaded in order to take diferent
+instanciations</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Version:</th><td class="field-body">0.0.1</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Author:</th><td class="field-body">sik</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="data_base.DataBase.draw_models">
+<tt class="descname">draw_models</tt><big>(</big><em>axisId</em><big>)</big><a class="reference internal" href="../_modules/data_base.html#DataBase.draw_models"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#data_base.DataBase.draw_models" title="Permalink to this definition">¶</a></dt>
+<dd><p>&#64;param mplAxis axisId :
+&#64;return  :
+&#64;author sik</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="data_base.DataBase.draw_samples">
+<tt class="descname">draw_samples</tt><big>(</big><em>axisId</em><big>)</big><a class="reference internal" href="../_modules/data_base.html#DataBase.draw_samples"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#data_base.DataBase.draw_samples" title="Permalink to this definition">¶</a></dt>
+<dd><p>&#64;param mplAxis axisId :
+&#64;return  :
+&#64;author sik</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/api/data_base.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">sampling strategy 0.0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2015, sik.
+      Last updated on Jan 23, 2015.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>

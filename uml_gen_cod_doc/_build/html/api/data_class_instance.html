@@ -1,0 +1,179 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>data_class_instance &mdash; sampling strategy 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="sampling strategy 0.0.1 documentation" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">sampling strategy 0.0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="data-class-instance">
+<h1>data_class_instance<a class="headerlink" href="#data-class-instance" title="Permalink to this headline">¶</a></h1>
+<p>random thoughts - sampling_strategy, support code</p>
+<dl class="class">
+<dt>
+<em class="property">class </em><tt class="descclassname">data_class_instance.</tt><tt class="descname">DataClassInstance</tt><big>(</big><em>name='no_name'</em>, <em>color='#555555'</em><big>)</big><a class="reference internal" href="../_modules/data_class_instance.html#DataClassInstance"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>DataClassInstance stores relevant info to identify the data&#8217;s class.</p>
+<p>This information describing the data in hand is further used in plots or to
+retrieve the data based on the data class attributes.</p>
+<dl class="attribute">
+<dt id="data_class_instance.DataClassInstance._name">
+<tt class="descname">_name</tt><a class="headerlink" href="#data_class_instance.DataClassInstance._name" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em></p>
+<p>Human readable string to identify the data in hand.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="data_class_instance.DataClassInstance._color">
+<tt class="descname">_color</tt><a class="headerlink" href="#data_class_instance.DataClassInstance._color" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em></p>
+<p>color code to identify the data when plotting. The color
+should be specified in hexacode as &#8216;#00ff00&#8217;.</p>
+</dd></dl>
+
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Date:</th><td class="field-body">2015-01-15</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Version:</th><td class="field-body">0.0.1</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Author:</th><td class="field-body">sik</td>
+</tr>
+</tbody>
+</table>
+<p>__init__ initializes the object storing name and color.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Despite having default attributes, no DataClassInstance should be
+initialized this manner since then data classes would be difficult
+to differentiate</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>name</strong> (<em>str, optional</em>) &#8211; Human readable data identifier. Defaults to
+no_name.</li>
+<li><strong>color</strong> (<em>str, optional</em>) &#8211; data color identifier. Defaults to #555555</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt>
+<tt class="descname">get_color</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/data_class_instance.html#DataClassInstance.get_color"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>color retrieve function</p>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<tt class="descname">get_name</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/data_class_instance.html#DataClassInstance.get_name"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>name retrieve function</p>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<tt class="descname">set_color</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="../_modules/data_class_instance.html#DataClassInstance.set_color"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>color setter function</p>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<tt class="descname">set_name</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="../_modules/data_class_instance.html#DataClassInstance.set_name"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>name setter function</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/api/data_class_instance.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">sampling strategy 0.0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2015, sik.
+      Last updated on Jan 23, 2015.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>
